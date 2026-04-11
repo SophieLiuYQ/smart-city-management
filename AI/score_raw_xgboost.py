@@ -39,6 +39,46 @@ def safe_float(series):
     return pd.to_numeric(series, errors="coerce")
 
 
+# ---------------------------------------------------------------------------
+# Filename resolver — works with both naming conventions
+# ---------------------------------------------------------------------------
+FILE_PATTERNS = {
+    "E1": ["E1_energy_cost_savings.csv", "Value_of_Energy_Cost_Savings"],
+    "E3": ["E3_electric_consumption.csv", "Electric_Consumption_And_Cost"],
+    "E4": ["E4_ev_fleet_stations.csv", "NYC_EV_Fleet_Station_Network"],
+    "E5": ["E5_solar_readiness.csv", "City_of_New_York_Municipal_Solar", "Municipal_Solar"],
+    "E7": ["E7_ll84_monthly.csv", "Local_Law_84_Monthly_Data"],
+    "E10": ["E10_ll84_benchmarking.csv", "NYC_Building_Energy_and_Water_Data"],
+    "W1": ["W1_dsny_monthly_tonnage.csv", "DSNY_Monthly_Tonnage"],
+    "W2": ["W2_311_dsny.csv", "311_Service_Requests"],
+    "W3": ["W3_litter_baskets.csv", "DSNY_Litter_Basket_Inventory"],
+    "W7": ["W7_food_scrap_dropoffs.csv", "Food_Scrap_Drop-Off", "Food_Scrap_Drop_Off"],
+    "W8": ["W8_disposal_facilities.csv", "Location_of_Disposal_Facilities"],
+    "W12": ["W12_waste_characterization.csv", "DSNY_Waste_Characterization"],
+}
+
+
+def find_raw_file(dataset_key):
+    """Find the raw CSV file by trying known name patterns."""
+    patterns = FILE_PATTERNS.get(dataset_key, [])
+    files_in_dir = os.listdir(RAW_DIR)
+
+    # Try exact match first
+    for pattern in patterns:
+        if pattern in files_in_dir:
+            return os.path.join(RAW_DIR, pattern)
+
+    # Try substring match
+    for pattern in patterns:
+        for f in files_in_dir:
+            if pattern.lower() in f.lower() and f.endswith(".csv"):
+                return os.path.join(RAW_DIR, f)
+
+    print(f"  [WARN] No file found for {dataset_key}. Tried: {patterns}")
+    print(f"         Files in {RAW_DIR}: {files_in_dir[:5]}...")
+    return None
+
+
 def timer(label):
     class T:
         def __enter__(self):
@@ -57,7 +97,7 @@ def timer(label):
 def load_e5():
     """Solar readiness — BASE TABLE (4,268 buildings)."""
     with timer("E5 Solar Readiness"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "E5_solar_readiness.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("E5"), low_memory=False)
         df["lat"] = safe_float(df["Latitude"])
         df["lon"] = safe_float(df["Longitude"])
         df["solar_kwh"] = safe_float(df["Estimated Annual Production"].astype(str).str.replace(",", ""))
@@ -81,7 +121,7 @@ def load_e5():
 def load_e3():
     """NYCHA electric consumption → per-development aggregates."""
     with timer("E3 Electric Consumption"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "E3_electric_consumption.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("E3"), low_memory=False)
         df["kwh"] = safe_float(df["Consumption (KWH)"])
         df["kw"] = safe_float(df["Consumption (KW)"])
         df["cost"] = safe_float(df["Current Charges"])
@@ -99,7 +139,7 @@ def load_e3():
 def load_e4():
     """EV fleet stations — lat/lon + port counts."""
     with timer("E4 EV Stations"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "E4_ev_fleet_stations.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("E4"), low_memory=False)
         df.columns = df.columns.str.strip().str.upper()
         df["lat"] = safe_float(df["LATITUDE"])
         df["lon"] = safe_float(df["LONGITUDE"])
@@ -112,7 +152,7 @@ def load_e4():
 def load_e7():
     """LL84 monthly energy → per-property aggregates."""
     with timer("E7 LL84 Monthly (2.2M rows)"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "E7_ll84_monthly.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("E7"), low_memory=False)
         KBTU = 0.293071
         elec_col = [c for c in df.columns if "Electricity" in c and "kBtu" in c]
         gas_col = [c for c in df.columns if "Natural Gas" in c and "kBtu" in c]
@@ -150,7 +190,7 @@ def load_e10():
             "Total (Location-Based) GHG Emissions (Metric Tons CO2e)",
             "Year Built", "Primary Property Type - Self Selected",
         ]
-        df = pd.read_csv(os.path.join(RAW_DIR, "E10_ll84_benchmarking.csv"),
+        df = pd.read_csv(find_raw_file("E10"),
                          usecols=usecols, low_memory=False)
         df.columns = ["prop_id", "bbl", "energy_star", "site_eui", "ghg", "year_built", "prop_type"]
         df["bbl"] = df["bbl"].astype(str).str.strip().str.split(".").str[0].str.zfill(10)
@@ -168,7 +208,7 @@ def load_e10():
 def load_w1():
     """DSNY monthly tonnage → per-district aggregates."""
     with timer("W1 Tonnage"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "W1_dsny_monthly_tonnage.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("W1"), low_memory=False)
         for c in ["REFUSETONSCOLLECTED", "PAPERTONSCOLLECTED", "MGPTONSCOLLECTED",
                    "RESORGANICSTONS", "SCHOOLORGANICTONS", "LEAVESORGANICTONS"]:
             if c in df.columns:
@@ -192,7 +232,7 @@ def load_w1():
 def load_w2():
     """311 DSNY complaints → per-district counts."""
     with timer("W2 311 Complaints"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "W2_311_dsny.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("W2"), low_memory=False)
         df.columns = df.columns.str.strip().str.lower()
         cb = df.get("community_board", df.get("community board", pd.Series("0")))
         df["cd"] = safe_float(cb.astype(str).str.extract(r"(\d+)", expand=False)).fillna(0).astype(int)
@@ -205,7 +245,7 @@ def load_w2():
 def load_w7():
     """Food scrap drop-offs — composting site locations."""
     with timer("W7 Compost"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "W7_food_scrap_dropoffs.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("W7"), low_memory=False)
         df["lat"] = safe_float(df["Latitude"])
         df["lon"] = safe_float(df["Longitude"])
         df = df.dropna(subset=["lat", "lon"])
@@ -216,7 +256,7 @@ def load_w7():
 def load_w8():
     """Disposal facilities — transfer station locations."""
     with timer("W8 Transfer Stations"):
-        df = pd.read_csv(os.path.join(RAW_DIR, "W8_disposal_facilities.csv"), low_memory=False)
+        df = pd.read_csv(find_raw_file("W8"), low_memory=False)
         df["lat"] = safe_float(df["Latitude"])
         df["lon"] = safe_float(df["Longitude"])
         df = df.dropna(subset=["lat", "lon"])
