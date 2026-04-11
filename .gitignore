@@ -1,11 +1,6 @@
 # Data files (too large for git)
-data/
-# Keep gold folder
+data/*
 !data/gold/
-# Keep silver and other subfolders if needed, but not their contents
-!data/silver/
-!data/bridge/
-!data/spatial/
 
 # Python
 __pycache__/
