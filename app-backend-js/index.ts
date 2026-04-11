@@ -2,53 +2,51 @@ import express, { Request, Response } from 'express';
 import multer from 'multer';
 import ollama from 'ollama';
 import fs from 'fs-extra';
-import path from 'path';
 
 const app = express();
-const upload = multer({ storage: multer.memoryStorage() }); // Store files in memory as buffers
+const upload = multer({ storage: multer.memoryStorage() });
 const PORT = 3000;
 const MODEL = "qwen3.5";
 
-// Middleware to parse form data (for the 'path' field)
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.post('/describe', upload.single('file'), async (req: Request, res: Response) => {
+app.post('/describe', upload.single('file'), async (req: any, res: any) => {
+    console.log("📩 Received request at /describe");
     try {
         const file = req.file;
         const localPath = req.body.path;
-        let imageSource: string | Buffer;
+        let imageSource: Buffer;
 
-        // 1. Handle File Upload (Buffer)
         if (file) {
+            console.log("🖼️ Processing uploaded file...");
             imageSource = file.buffer;
-        } 
-        // 2. Handle Local Path (Fallback)
-        else if (localPath) {
+        } else if (localPath) {
+            console.log(`📂 Reading file from path: ${localPath}`);
             if (!(await fs.pathExists(localPath))) {
                 return res.status(404).json({ detail: "Local path not found" });
             }
-            // Read the file into a buffer to send to Ollama
             imageSource = await fs.readFile(localPath);
-        } 
-        else {
-            return res.status(400).json({ detail: "Provide either a file or a path" });
+        } else {
+            return res.status(400).json({ detail: "No file or path provided" });
         }
 
-        // 3. Call Ollama
+        console.log("🤖 Sending to Ollama...");
         const response = await ollama.generate({
             model: MODEL,
             prompt: "Describe this image.",
             images: [imageSource]
         });
 
+        console.log("✅ Success!");
         res.json({ description: response.response });
 
     } catch (error: any) {
-        console.error(error);
+        console.error("❌ Error:", error.message);
         res.status(500).json({ detail: error.message });
     }
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server is screaming for attention at http://localhost:${PORT}`);
+    console.log(`🛠️ Using model: ${MODEL}`);
 });
