@@ -7,6 +7,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { useDashboard } from '../../context/DashboardContext';
 import { ENERGY_SITES, NEXUS_SITES, scoreColor } from '../../data/sites';
 import { BOROUGH_POLYGONS, EJ_POLYGONS, WASTE_DISTRICT_POINTS } from '../../data/districts';
+import { TOP10_DISTRICTS_GEOJSON } from '../../data/top10Districts';
 import MapLegend from './MapLegend';
 import MapControls from './MapControls';
 
@@ -146,6 +147,39 @@ const EJ_FILL_LAYER = {
   },
 };
 
+/** Top-10 district circle layer — gold ring markers */
+const DISTRICT_CIRCLE_LAYER = {
+  id: 'top10-districts',
+  type: 'circle',
+  source: 'top10-districts',
+  paint: {
+    'circle-radius': 14,
+    'circle-color': 'rgba(234,179,8,0.18)',
+    'circle-stroke-color': '#EAB308',
+    'circle-stroke-width': 2.5,
+    'circle-opacity': 1,
+  },
+};
+
+/** Rank number label on top of each district circle */
+const DISTRICT_LABEL_LAYER = {
+  id: 'top10-districts-labels',
+  type: 'symbol',
+  source: 'top10-districts',
+  layout: {
+    'text-field': ['to-string', ['get', 'rank']],
+    'text-size': 11,
+    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+    'text-allow-overlap': true,
+    'text-ignore-placement': true,
+  },
+  paint: {
+    'text-color': '#FDE047',
+    'text-halo-color': '#0B1120',
+    'text-halo-width': 1,
+  },
+};
+
 export default function CityMap() {
   const mapRef = useRef(null);
   const { viewMode, selectedId, selectSite, borough, minScore } = useDashboard();
@@ -220,6 +254,42 @@ export default function CityMap() {
     if (!mapRef.current) return;
     const map = mapRef.current.getMap();
 
+    // Top-10 district hover — checked in all view modes
+    const districtFeatures = map.queryRenderedFeatures(e.point, { layers: ['top10-districts'] });
+    if (districtFeatures.length) {
+      map.getCanvas().style.cursor = 'pointer';
+      const p = districtFeatures[0].properties;
+      const coords = districtFeatures[0].geometry.coordinates;
+      setPopup({
+        lng: coords[0], lat: coords[1],
+        content: (
+          <div>
+            <div style={{ fontWeight: 700, marginBottom: 4, color: 'black' }}>
+              #{p.rank} {p.code} — {p.borough} CD{p.district}
+            </div>
+            <div style={{ color: '#FDE047', marginBottom: 4, fontSize: 12 }}>
+              ☀ Solar Potential: {Number(p.solar_kwh_yr).toLocaleString()} kWh/yr
+            </div>
+            <div style={{ color: '#94A3B8', fontSize: 11 }}>
+              Buildings: <span style={{ color: '#F1F5F9' }}>{p.buildings}</span>
+              {' '}· Solar-ready: <span style={{ color: '#6EE7B7' }}>{p.solar_ready}</span>
+            </div>
+            <div style={{ color: '#94A3B8', fontSize: 11 }}>
+              BESS Savings: <span style={{ color: '#10B981' }}>${Number(p.bess_savings_usd).toLocaleString()}/yr</span>
+            </div>
+            {p.pct_ej > 20 && (
+              <div style={{ marginTop: 4 }}>
+                <span style={{ background: 'rgba(139,92,246,.15)', color: '#C4B5FD', padding: '1px 6px', borderRadius: 20, fontSize: 10 }}>
+                  {p.pct_ej}% EJ
+                </span>
+              </div>
+            )}
+          </div>
+        ),
+      });
+      return;
+    }
+
     if (viewMode === 'energy') {
       const features = map.queryRenderedFeatures(e.point, { layers: ['energy-sites'] });
       map.getCanvas().style.cursor = features.length ? 'pointer' : '';
@@ -245,6 +315,8 @@ export default function CityMap() {
       } else {
         setPopup(null);
       }
+    } else {
+      map.getCanvas().style.cursor = '';
     }
   }, [viewMode]);
 
@@ -272,7 +344,10 @@ export default function CityMap() {
         style={{ width: '100%', height: '100%' }}
         onClick={onMapClick}
         onMouseMove={onMouseMove}
-        interactiveLayerIds={viewMode === 'energy' ? ['energy-sites'] : viewMode === 'waste' ? ['waste-districts'] : []}
+        interactiveLayerIds={[
+          'top10-districts',
+          ...(viewMode === 'energy' ? ['energy-sites'] : viewMode === 'waste' ? ['waste-districts'] : []),
+        ]}
         attributionControl={false}
         logoPosition="bottom-right"
       >
@@ -321,6 +396,12 @@ export default function CityMap() {
             <Layer {...NEXUS_HEATMAP_LAYER} />
           </Source>
         )}
+
+        {/* ── TOP-10 SOLAR DISTRICTS (all modes) ── */}
+        <Source id="top10-districts" type="geojson" data={TOP10_DISTRICTS_GEOJSON}>
+          <Layer {...DISTRICT_CIRCLE_LAYER} />
+          <Layer {...DISTRICT_LABEL_LAYER} />
+        </Source>
 
         {/* ── HOVER POPUP ── */}
         {popup && (
