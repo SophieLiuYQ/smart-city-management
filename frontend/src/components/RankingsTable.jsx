@@ -1,62 +1,124 @@
 'use client';
 
-import { useMemo } from 'react';
-import { useDashboard } from '../context/DashboardContext';
-import { ENERGY_SITES, WASTE_SITES, NEXUS_SITES, scoreBg, scoreText } from '../data/sites';
+import { useState } from 'react';
+import { TOP10_DISTRICTS_GEOJSON } from '../data/top10Districts';
+import { DISTRICT_BUILDINGS } from '../data/districtBuildings';
 
-function ScoreBadge({ score }) {
-  return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      padding: '2px 7px', borderRadius: 20, fontSize: 11, fontWeight: 700,
-      background: scoreBg(score), color: scoreText(score),
-      minWidth: 32,
-    }}>
-      {score}
-    </span>
-  );
-}
+const districts = TOP10_DISTRICTS_GEOJSON.features.map(f => f.properties);
 
-function OrganicPill({ organic }) {
-  const map = {
-    High:   { bg: 'rgba(16,185,129,.15)',  text: '#6EE7B7' },
-    Medium: { bg: 'rgba(245,158,11,.15)', text: '#FCD34D' },
-    Low:    { bg: 'rgba(100,116,139,.15)', text: '#94A3B8' },
-  };
-  const s = map[organic] ?? map.Low;
-  return (
-    <span style={{
-      display: 'inline-block', padding: '2px 6px', borderRadius: 20, fontSize: 11,
-      background: s.bg, color: s.text, fontWeight: 500,
-    }}>
-      {organic}
-    </span>
-  );
-}
-
-const TH = { padding: '6px 8px', textAlign: 'left', fontSize: 10, color: '#475569', fontWeight: 600, letterSpacing: '0.05em', borderBottom: '1px solid #1E293B', whiteSpace: 'nowrap' };
+/* ── style constants ── */
+const TH = {
+  padding: '6px 8px', textAlign: 'left', fontSize: 10,
+  color: '#475569', fontWeight: 600, letterSpacing: '0.05em',
+  borderBottom: '1px solid #1E293B', whiteSpace: 'nowrap',
+};
 const TD = { padding: '6px 8px', borderBottom: '1px solid rgba(30,41,59,.5)', fontSize: 12 };
+const BTH = {
+  padding: '5px 8px', textAlign: 'left', fontSize: 10,
+  color: '#334155', fontWeight: 600, letterSpacing: '0.05em',
+  borderBottom: '1px solid rgba(30,41,59,.6)', whiteSpace: 'nowrap',
+};
+const BTD = { padding: '5px 8px', borderBottom: '1px solid rgba(30,41,59,.35)', fontSize: 11 };
 
+function fmtKwh(n) {
+  if (n == null) return '—';
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000)     return `${(n / 1_000).toFixed(0)}K`;
+  return String(Math.round(n));
+}
+function fmtUsd(n) {
+  if (n == null || n === 0) return '—';
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000)     return `$${(n / 1_000).toFixed(0)}K`;
+  return `$${n}`;
+}
+
+/* ── building sub-table rendered inside an expanded district row ── */
+function BuildingsPanel({ code }) {
+  const slice = DISTRICT_BUILDINGS[code] ?? [];
+  const total = slice.length;
+
+  return (
+    <tr>
+      <td colSpan={8} style={{ padding: 0, background: '#0D1526' }}>
+        <div style={{ padding: '10px 14px 14px' }}>
+          {/* sub-header */}
+          <div style={{
+            fontSize: 10, fontWeight: 600, color: '#475569',
+            letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8,
+          }}>
+            {total} Buildings · {code}
+          </div>
+
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 600 }}>
+              <thead>
+                <tr style={{ background: 'rgba(30,41,59,.5)' }}>
+                  <th style={BTH}>Site</th>
+                  <th style={BTH}>Address</th>
+                  <th style={BTH}>Agency</th>
+                  <th style={{ ...BTH, textAlign: 'center' }}>EJ</th>
+                  <th style={{ ...BTH, textAlign: 'right' }}>Solar kWh/yr</th>
+                  <th style={{ ...BTH, textAlign: 'right' }}>Ann. Cost</th>
+                  <th style={{ ...BTH, textAlign: 'right' }}>GHG t CO₂</th>
+                  <th style={{ ...BTH, textAlign: 'right' }}>BESS kWh</th>
+                  <th style={{ ...BTH, textAlign: 'right' }}>BESS Savings/yr</th>
+                </tr>
+              </thead>
+              <tbody>
+                {slice.map((b, i) => (
+                  <tr
+                    key={i}
+                    style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(15,23,42,.4)' }}
+                  >
+                    <td style={{ ...BTD, fontWeight: 500, color: '#CBD5E1', maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                        title={b.site}>{b.site || '—'}</td>
+                    <td style={{ ...BTD, color: '#94A3B8', maxWidth: 140, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                        title={b.address}>{b.address || '—'}</td>
+                    <td style={BTD}>
+                      <span style={{
+                        background: 'rgba(100,116,139,.15)', color: '#94A3B8',
+                        padding: '1px 5px', borderRadius: 20, fontSize: 10,
+                      }}>{b.agency || '—'}</span>
+                    </td>
+                    <td style={{ ...BTD, textAlign: 'center' }}>
+                      {b.ej
+                        ? <span style={{ background: 'rgba(139,92,246,.15)', color: '#C4B5FD', padding: '1px 5px', borderRadius: 20, fontSize: 10 }}>EJ</span>
+                        : <span style={{ color: '#334155', fontSize: 10 }}>—</span>
+                      }
+                    </td>
+                    <td style={{ ...BTD, textAlign: 'right', color: '#FDE047', fontVariantNumeric: 'tabular-nums' }}>
+                      {fmtKwh(b.solar_kwh_yr)}
+                    </td>
+                    <td style={{ ...BTD, textAlign: 'right', color: '#93C5FD', fontVariantNumeric: 'tabular-nums' }}>
+                      {fmtUsd(b.annual_cost_usd)}
+                    </td>
+                    <td style={{ ...BTD, textAlign: 'right', color: '#6EE7B7', fontVariantNumeric: 'tabular-nums' }}>
+                      {b.ghg_co2 != null ? b.ghg_co2 : '—'}
+                    </td>
+                    <td style={{ ...BTD, textAlign: 'right', color: '#FCD34D', fontVariantNumeric: 'tabular-nums' }}>
+                      {b.bess_kwh != null ? `${b.bess_kwh}` : '—'}
+                    </td>
+                    <td style={{ ...BTD, textAlign: 'right', color: '#10B981', fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+                      {fmtUsd(b.bess_savings_usd)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </td>
+    </tr>
+  );
+}
+
+/* ── main component ── */
 export default function RankingsTable() {
-  const { viewMode, selectedId, selectSite, borough, minScore } = useDashboard();
+  const [expanded, setExpanded] = useState(null);
 
-  const { rows, count } = useMemo(() => {
-    if (viewMode === 'energy') {
-      const r = ENERGY_SITES.filter(s =>
-        (borough === 'All Boroughs' || s.borough === borough) && s.score >= minScore
-      );
-      return { rows: r, count: r.length };
-    }
-    if (viewMode === 'waste') {
-      const r = WASTE_SITES.filter(s =>
-        (borough === 'All Boroughs' || s.borough === borough) && s.score >= minScore
-      );
-      return { rows: r, count: r.length };
-    }
-    // nexus
-    const r = NEXUS_SITES.filter(s => borough === 'All Boroughs' || s.borough === borough);
-    return { rows: r, count: r.length };
-  }, [viewMode, borough, minScore]);
+  const toggle = (code) => setExpanded(prev => prev === code ? null : code);
 
   return (
     <div style={{ background: '#131C2E', border: '1px solid #1E293B', borderRadius: 12, overflow: 'hidden' }}>
@@ -65,128 +127,137 @@ export default function RankingsTable() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '12px 14px', borderBottom: '1px solid #1E293B',
       }}>
-        <span style={{ fontWeight: 600, fontSize: 13 }}>Top Sites</span>
+        <span style={{ fontWeight: 600, fontSize: 13 }}>Top 10 Districts — Solar Potential</span>
         <span style={{
           display: 'inline-block', padding: '2px 6px', borderRadius: 20, fontSize: 11,
-          background: 'rgba(59,130,246,.15)', color: '#93C5FD',
+          background: 'rgba(234,179,8,.15)', color: '#FDE047',
         }}>
-          {count} results
+          ☀ kWh/yr ranked
         </span>
       </div>
 
       {/* Scrollable table */}
-      <div style={{ overflowY: 'auto', maxHeight: 360 }}>
+      <div style={{ overflowY: 'auto', maxHeight: 520 }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          {viewMode === 'energy' && (
-            <>
-              <thead>
-                <tr>
-                  <th style={TH}>#</th>
-                  <th style={TH}>Site</th>
-                  <th style={TH}>Borough</th>
-                  <th style={TH}>Energy</th>
-                  <th style={TH}>Waste</th>
-                  <th style={TH}>Nexus</th>
-                  <th style={TH}>BESS</th>
-                  <th style={TH}>Savings/yr</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((s) => {
-                  const isSelected = s.id === selectedId;
-                  return (
-                    <tr
-                      key={s.id}
-                      onClick={() => selectSite(s.id)}
-                      style={{
-                        cursor: 'pointer',
-                        background: isSelected ? 'rgba(59,130,246,.08)' : 'transparent',
-                        transition: 'background 0.15s',
-                      }}
-                      onMouseEnter={e => !isSelected && (e.currentTarget.style.background = 'rgba(59,130,246,.04)')}
-                      onMouseLeave={e => !isSelected && (e.currentTarget.style.background = 'transparent')}
-                    >
-                      <td style={{ ...TD, color: '#475569', borderLeft: isSelected ? '2px solid #3B82F6' : '2px solid transparent' }}>{s.rank}</td>
-                      <td style={{ ...TD, fontWeight: 500, maxWidth: 130, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
-                          title={s.name}>{s.name}</td>
-                      <td style={TD}>
-                        <span style={{ background: 'rgba(100,116,139,.15)', color: '#94A3B8', padding: '2px 6px', borderRadius: 20, fontSize: 10 }}>
-                          {s.borough === 'Staten Island' ? 'S.I.' : s.borough}
+          <thead>
+            <tr>
+              <th style={TH}></th>
+              <th style={TH}>#</th>
+              <th style={TH}>District</th>
+              <th style={TH}>Borough</th>
+              <th style={TH}>Solar kWh/yr</th>
+              <th style={TH}>BESS Savings/yr</th>
+              <th style={TH}>Buildings</th>
+              <th style={{ ...TH, textAlign: 'center' }}>Solar Ready</th>
+              <th style={{ ...TH, textAlign: 'center' }}>EJ %</th>
+            </tr>
+          </thead>
+          <tbody>
+            {districts.map((d) => {
+              const isOpen = expanded === d.code;
+              return (
+                <>
+                  {/* District summary row */}
+                  <tr
+                    key={d.code}
+                    onClick={() => toggle(d.code)}
+                    style={{
+                      cursor: 'pointer',
+                      background: isOpen ? 'rgba(234,179,8,.06)' : 'transparent',
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => { if (!isOpen) e.currentTarget.style.background = 'rgba(234,179,8,.03)'; }}
+                    onMouseLeave={e => { if (!isOpen) e.currentTarget.style.background = 'transparent'; }}
+                  >
+                    {/* chevron */}
+                    <td style={{ ...TD, width: 28, paddingRight: 0 }}>
+                      <span style={{
+                        display: 'inline-block', fontSize: 10, color: '#475569',
+                        transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s',
+                        userSelect: 'none',
+                      }}>▶</span>
+                    </td>
+
+                    {/* rank */}
+                    <td style={{
+                      ...TD,
+                      borderLeft: `2px solid ${d.rank === 1 ? '#EAB308' : 'transparent'}`,
+                    }}>
+                      <span style={{
+                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        width: 20, height: 20, borderRadius: '50%', fontSize: 10, fontWeight: 700,
+                        background: d.rank <= 3 ? 'rgba(234,179,8,.2)' : 'rgba(100,116,139,.1)',
+                        color: d.rank <= 3 ? '#FDE047' : '#64748B',
+                      }}>
+                        {d.rank}
+                      </span>
+                    </td>
+
+                    {/* code + CD */}
+                    <td style={{ ...TD, fontWeight: 600, color: '#F1F5F9' }}>
+                      {d.code}
+                      <span style={{ color: '#475569', fontWeight: 400, marginLeft: 4, fontSize: 11 }}>
+                        CD{d.district}
+                      </span>
+                    </td>
+
+                    {/* borough */}
+                    <td style={TD}>
+                      <span style={{
+                        background: 'rgba(100,116,139,.15)', color: '#94A3B8',
+                        padding: '2px 6px', borderRadius: 20, fontSize: 10,
+                      }}>
+                        {d.borough === 'Staten Island' ? 'S.I.' : d.borough}
+                      </span>
+                    </td>
+
+                    {/* solar */}
+                    <td style={{ ...TD, color: '#FDE047', fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+                      {fmtKwh(d.solar_kwh_yr)}
+                    </td>
+
+                    {/* bess savings */}
+                    <td style={{ ...TD, color: '#10B981', fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+                      {fmtUsd(d.bess_savings_usd)}
+                    </td>
+
+                    {/* buildings count */}
+                    <td style={{ ...TD, color: '#93C5FD', fontVariantNumeric: 'tabular-nums' }}>
+                      {d.buildings}
+                    </td>
+
+                    {/* solar ready */}
+                    <td style={{ ...TD, textAlign: 'center' }}>
+                      <span style={{
+                        background: 'rgba(234,179,8,.12)', color: '#FCD34D',
+                        padding: '2px 7px', borderRadius: 20, fontSize: 11, fontWeight: 600,
+                      }}>
+                        {d.solar_ready}
+                      </span>
+                    </td>
+
+                    {/* ej % */}
+                    <td style={{ ...TD, textAlign: 'center' }}>
+                      {d.pct_ej > 20 ? (
+                        <span style={{
+                          background: 'rgba(139,92,246,.15)', color: '#C4B5FD',
+                          padding: '2px 7px', borderRadius: 20, fontSize: 11, fontWeight: 600,
+                        }}>
+                          {d.pct_ej}%
                         </span>
-                      </td>
-                      <td style={TD}><ScoreBadge score={s.energyScore} /></td>
-                      <td style={TD}><ScoreBadge score={s.wasteScore} /></td>
-                      <td style={TD}><ScoreBadge score={s.nexusScore} /></td>
-                      <td style={{ ...TD, color: '#93C5FD', fontVariantNumeric: 'tabular-nums' }}>{s.bessKwh} kWh</td>
-                      <td style={{ ...TD, color: '#10B981', fontWeight: 600 }}>{s.savings}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </>
-          )}
-
-          {viewMode === 'waste' && (
-            <>
-              <thead>
-                <tr>
-                  <th style={TH}>#</th>
-                  <th style={TH}>District</th>
-                  <th style={TH}>Borough</th>
-                  <th style={TH}>Score</th>
-                  <th style={TH}>Refuse t/mo</th>
-                  <th style={TH}>Diversion</th>
-                  <th style={TH}>Organic</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((s, i) => (
-                  <tr key={s.id} style={{ cursor: 'pointer' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(59,130,246,.04)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                    <td style={{ ...TD, color: '#475569' }}>{i + 1}</td>
-                    <td style={{ ...TD, fontWeight: 500 }}>{s.name}</td>
-                    <td style={TD}><span style={{ background: 'rgba(100,116,139,.15)', color: '#94A3B8', padding: '2px 6px', borderRadius: 20, fontSize: 10 }}>{s.borough}</span></td>
-                    <td style={TD}><ScoreBadge score={s.score} /></td>
-                    <td style={{ ...TD, fontVariantNumeric: 'tabular-nums' }}>{s.ref.toLocaleString()}</td>
-                    <td style={{ ...TD, color: '#F59E0B' }}>{s.diversion}</td>
-                    <td style={TD}><OrganicPill organic={s.organic} /></td>
+                      ) : (
+                        <span style={{ color: '#475569', fontSize: 11 }}>{d.pct_ej}%</span>
+                      )}
+                    </td>
                   </tr>
-                ))}
-              </tbody>
-            </>
-          )}
 
-          {viewMode === 'nexus' && (
-            <>
-              <thead>
-                <tr>
-                  <th style={TH}>#</th>
-                  <th style={TH}>Location</th>
-                  <th style={TH}>Borough</th>
-                  <th style={TH}>Energy</th>
-                  <th style={TH}>Waste</th>
-                  <th style={TH}>Nexus</th>
-                  <th style={TH}>CO₂</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((s, i) => (
-                  <tr key={s.id} style={{ cursor: 'pointer' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(59,130,246,.04)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                    <td style={{ ...TD, color: '#475569' }}>{i + 1}</td>
-                    <td style={{ ...TD, fontWeight: 500 }}>{s.name}</td>
-                    <td style={TD}><span style={{ background: 'rgba(100,116,139,.15)', color: '#94A3B8', padding: '2px 6px', borderRadius: 20, fontSize: 10 }}>{s.borough}</span></td>
-                    <td style={TD}><ScoreBadge score={s.eScore} /></td>
-                    <td style={TD}><span style={{ background: 'rgba(245,158,11,.15)', color: '#FCD34D', padding: '2px 7px', borderRadius: 20, fontSize: 11, fontWeight: 700 }}>{s.wScore}</span></td>
-                    <td style={TD}><span style={{ background: 'rgba(139,92,246,.15)', color: '#C4B5FD', padding: '2px 7px', borderRadius: 20, fontSize: 11, fontWeight: 700 }}>{s.nScore}</span></td>
-                    <td style={{ ...TD, color: '#10B981' }}>{s.co2}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </>
-          )}
+                  {/* Collapsible buildings panel */}
+                  {isOpen && <BuildingsPanel key={`${d.code}-panel`} code={d.code} />}
+                </>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     </div>
