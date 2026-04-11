@@ -1,0 +1,3392 @@
+[
+  {
+    "district_code": "MN11",
+    "borough": "Manhattan",
+    "community_district": 11,
+    "centroid_lat": 40.793766,
+    "centroid_lon": -73.933877,
+    "buildings_summary": {
+      "total": 168,
+      "environmental_justice": 79,
+      "pct_ej": 47.0,
+      "solar_ready": 13,
+      "total_solar_potential_kwh_yr": 9469229.0,
+      "avg_solar_per_building_kwh_yr": 56364.0,
+      "pct_roof_good": 15.5,
+      "total_sqft": 9717610.0,
+      "with_energy_data": 118,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 40700,
+      "total_bess_savings_usd_yr": 7287775
+    },
+    "buildings": [
+      {
+        "site": "NYPA PPA 8 Locations",
+        "address": "Wards Island WPCP",
+        "agency": "DEP",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 7993700.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 186809.0,
+          "avg_total_kwh_mo": 186809.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1937.0,
+          "ghg_tons_co2e_yr": 32.0,
+          "year_built": 239,
+          "property_type": "38584.7"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "M501",
+        "address": "2005 Madison Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 434148.0,
+          "avg_elec_kwh_mo": 118662.0,
+          "avg_gas_kwh_mo": 7041.0,
+          "avg_total_kwh_mo": 66372.0,
+          "peak_elec_kwh_mo": 167193.0,
+          "est_peak_kw": 343.5,
+          "est_annual_cost_usd": 313267.0,
+          "seasonality": 0.24,
+          "energy_star_score": -1,
+          "site_eui": 1965.0,
+          "ghg_tons_co2e_yr": 63.0,
+          "year_built": 65,
+          "property_type": "1128.75"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "M117",
+        "address": "240 East 109 St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 172000.0,
+        "energy": {
+          "solar_production_kwh_yr": 269720.0,
+          "avg_elec_kwh_mo": 62442.0,
+          "avg_gas_kwh_mo": 90775.0,
+          "avg_total_kwh_mo": 121996.0,
+          "peak_elec_kwh_mo": 84796.0,
+          "est_peak_kw": 174.2,
+          "est_annual_cost_usd": 164846.0,
+          "seasonality": 0.18,
+          "energy_star_score": -1,
+          "site_eui": 1958.0,
+          "ghg_tons_co2e_yr": 64.0,
+          "year_built": 73,
+          "property_type": "957.24"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "M206",
+        "address": "508 East 120th St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 263296.0,
+          "avg_elec_kwh_mo": 53220.0,
+          "avg_gas_kwh_mo": 102358.0,
+          "avg_total_kwh_mo": 128968.0,
+          "peak_elec_kwh_mo": 81197.0,
+          "est_peak_kw": 166.8,
+          "est_annual_cost_usd": 140501.0,
+          "seasonality": 0.2,
+          "energy_star_score": -1,
+          "site_eui": 1968.0,
+          "ghg_tons_co2e_yr": 92.0,
+          "year_built": 41,
+          "property_type": "480.05"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "M079",
+        "address": "55 East 120 St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 164010.0,
+          "avg_elec_kwh_mo": 34249.0,
+          "avg_gas_kwh_mo": 613.0,
+          "avg_total_kwh_mo": 22630.0,
+          "peak_elec_kwh_mo": 53798.0,
+          "est_peak_kw": 110.5,
+          "est_annual_cost_usd": 90416.0,
+          "seasonality": 0.23,
+          "energy_star_score": -1,
+          "site_eui": 1962.0,
+          "ghg_tons_co2e_yr": 78.0,
+          "year_built": 54,
+          "property_type": "523.86"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "M646",
+        "address": "321 E. 96 St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Fair",
+        "sqft": 102000.0,
+        "energy": {
+          "solar_production_kwh_yr": 115830.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 153292.0,
+          "avg_total_kwh_mo": 153292.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1942.0,
+          "ghg_tons_co2e_yr": 29.0,
+          "year_built": 85,
+          "property_type": "702"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "M099",
+        "address": "410 East 100 St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Between Good and Fair",
+        "sqft": 115000.0,
+        "energy": {
+          "solar_production_kwh_yr": 65120.0,
+          "avg_elec_kwh_mo": 57775.0,
+          "avg_gas_kwh_mo": 188808.0,
+          "avg_total_kwh_mo": 217696.0,
+          "peak_elec_kwh_mo": 89996.0,
+          "est_peak_kw": 184.9,
+          "est_annual_cost_usd": 152527.0,
+          "seasonality": 0.23,
+          "energy_star_score": -1,
+          "site_eui": 1925.0,
+          "ghg_tons_co2e_yr": 69.0,
+          "year_built": 73,
+          "property_type": "715.05"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      },
+      {
+        "site": "Jennie A. Clarke Residence",
+        "address": "179 East 100th St",
+        "agency": "DHS",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 21870.0,
+        "energy": {
+          "solar_production_kwh_yr": 52580.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 77403.0,
+          "avg_total_kwh_mo": 77403.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1910.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 57,
+          "property_type": "268.2"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      },
+      {
+        "site": "Henry J. Carter Hospital",
+        "address": "1879 Madison Ave",
+        "agency": "HHC",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 276398.0,
+        "energy": {
+          "solar_production_kwh_yr": 37950.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 492005.0,
+          "avg_total_kwh_mo": 492005.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1979.0,
+          "ghg_tons_co2e_yr": 93.0,
+          "year_built": 144,
+          "property_type": "3457"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 250,
+          "power_kw": 63,
+          "est_annual_savings_usd": 45070
+        }
+      },
+      {
+        "site": "East 119th Street Veterans Residence",
+        "address": "22 East 119th St",
+        "agency": "DHS",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 65510.0,
+        "energy": {
+          "solar_production_kwh_yr": 24640.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 115188.0,
+          "avg_total_kwh_mo": 115188.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1988.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 95,
+          "property_type": "448.2"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 250,
+          "power_kw": 63,
+          "est_annual_savings_usd": 45070
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 2776.0,
+      "paper_recycling_tons_per_month": 138.0,
+      "mgp_recycling_tons_per_month": 125.0,
+      "organics_collected_tons_per_month": 5.0,
+      "total_tons_per_month": 3043.0,
+      "diversion_rate_pct": 9.1,
+      "diversion_gap_pct": 20.9
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 944.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 472.0,
+        "energy_mwh_per_year": 5662.0,
+        "apartments_powered_per_month": 524.0,
+        "co2_avoided_tons_per_month": 136.0,
+        "co2_avoided_tons_per_year": 1631.0
+      },
+      "nearest_ad_facility": "Hunts Point WRRF",
+      "nearest_ad_distance_km": 5.5
+    },
+    "complaints": {
+      "total": 12635,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 67,
+      "ev_ports_within_2km": 98,
+      "composting_sites_within_2km": 28,
+      "nearest_transfer_station": "Waste Management - Harlem River Yard",
+      "nearest_transfer_distance_km": 1.6
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "SI03",
+    "borough": "Staten Island",
+    "community_district": 3,
+    "centroid_lat": 40.545108,
+    "centroid_lon": -74.178621,
+    "buildings_summary": {
+      "total": 66,
+      "environmental_justice": 1,
+      "pct_ej": 1.5,
+      "solar_ready": 12,
+      "total_solar_potential_kwh_yr": 3877599.0,
+      "avg_solar_per_building_kwh_yr": 58752.0,
+      "pct_roof_good": 9.1,
+      "total_sqft": 3520385.0,
+      "with_energy_data": 53,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 26000,
+      "total_bess_savings_usd_yr": 4657250
+    },
+    "buildings": [
+      {
+        "site": "Staten Island 1/3 (New Construction)",
+        "address": "1323 West Service Rd",
+        "agency": "DSNY",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 746856.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1970.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 183,
+          "property_type": "1127"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R062 - NET ZERO",
+        "address": "644 Bloomingdale Rd",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 680570.0,
+          "avg_elec_kwh_mo": 35183.0,
+          "avg_gas_kwh_mo": 4909.0,
+          "avg_total_kwh_mo": 31910.0,
+          "peak_elec_kwh_mo": 63950.0,
+          "est_peak_kw": 131.4,
+          "est_annual_cost_usd": 92884.0,
+          "seasonality": 0.43,
+          "energy_star_score": -1,
+          "site_eui": 2015.0,
+          "ghg_tons_co2e_yr": 73.0,
+          "year_built": 38,
+          "property_type": "212.27"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R455_Tottenville High School",
+        "address": "100 Luten Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 585783.0,
+          "avg_elec_kwh_mo": 185358.0,
+          "avg_gas_kwh_mo": 68296.0,
+          "avg_total_kwh_mo": 160975.0,
+          "peak_elec_kwh_mo": 229453.0,
+          "est_peak_kw": 471.5,
+          "est_annual_cost_usd": 489346.0,
+          "seasonality": 0.13,
+          "energy_star_score": -1,
+          "site_eui": 1972.0,
+          "ghg_tons_co2e_yr": 92.0,
+          "year_built": 42,
+          "property_type": "1606.15"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Staten Island 3 District Garage (BRS)",
+        "address": "1323 West Service Rd",
+        "agency": "DSNY",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 327910.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1970.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 183,
+          "property_type": "1127"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R036",
+        "address": "255 Ionia Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 313500.0,
+          "avg_elec_kwh_mo": 47131.0,
+          "avg_gas_kwh_mo": 88602.0,
+          "avg_total_kwh_mo": 107774.0,
+          "peak_elec_kwh_mo": 75197.0,
+          "est_peak_kw": 154.5,
+          "est_annual_cost_usd": 124427.0,
+          "seasonality": 0.23,
+          "energy_star_score": -1,
+          "site_eui": 1974.0,
+          "ghg_tons_co2e_yr": 75.0,
+          "year_built": 56,
+          "property_type": "449.07"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R036",
+        "address": "255 Ionia Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 83000.0,
+        "energy": {
+          "solar_production_kwh_yr": 313500.0,
+          "avg_elec_kwh_mo": 47131.0,
+          "avg_gas_kwh_mo": 88602.0,
+          "avg_total_kwh_mo": 107774.0,
+          "peak_elec_kwh_mo": 75197.0,
+          "est_peak_kw": 154.5,
+          "est_annual_cost_usd": 124427.0,
+          "seasonality": 0.23,
+          "energy_star_score": -1,
+          "site_eui": 1974.0,
+          "ghg_tons_co2e_yr": 75.0,
+          "year_built": 56,
+          "property_type": "449.07"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R007",
+        "address": "1270 Huguenot Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 262999.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 1799.0,
+          "avg_total_kwh_mo": 1799.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1964.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 68,
+          "property_type": "2"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R003",
+        "address": "80 South Goff Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 257917.0,
+          "avg_elec_kwh_mo": 36147.0,
+          "avg_gas_kwh_mo": 25097.0,
+          "avg_total_kwh_mo": 43072.0,
+          "peak_elec_kwh_mo": 51518.0,
+          "est_peak_kw": 105.9,
+          "est_annual_cost_usd": 95429.0,
+          "seasonality": 0.15,
+          "energy_star_score": -1,
+          "site_eui": 1958.0,
+          "ghg_tons_co2e_yr": 83.0,
+          "year_built": 52,
+          "property_type": "313.97"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R050",
+        "address": "200 Adelaide Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 83000.0,
+        "energy": {
+          "solar_production_kwh_yr": 200200.0,
+          "avg_elec_kwh_mo": 28888.0,
+          "avg_gas_kwh_mo": 77457.0,
+          "avg_total_kwh_mo": 91900.0,
+          "peak_elec_kwh_mo": 41198.0,
+          "est_peak_kw": 84.7,
+          "est_annual_cost_usd": 76263.0,
+          "seasonality": 0.2,
+          "energy_star_score": -1,
+          "site_eui": 1957.0,
+          "ghg_tons_co2e_yr": 83.0,
+          "year_built": 43,
+          "property_type": "312.28"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R075_I.S. 075 Frank D. Paulo",
+        "address": "455 Huguenot Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 142648.0,
+          "avg_elec_kwh_mo": 82831.0,
+          "avg_gas_kwh_mo": 1695.0,
+          "avg_total_kwh_mo": 34827.0,
+          "peak_elec_kwh_mo": 156422.0,
+          "est_peak_kw": 321.4,
+          "est_annual_cost_usd": 218674.0,
+          "seasonality": 0.28,
+          "energy_star_score": -1,
+          "site_eui": 1983.0,
+          "ghg_tons_co2e_yr": 83.0,
+          "year_built": 64,
+          "property_type": "1092.21"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 5937.0,
+      "paper_recycling_tons_per_month": 636.0,
+      "mgp_recycling_tons_per_month": 549.0,
+      "organics_collected_tons_per_month": 50.0,
+      "total_tons_per_month": 7173.0,
+      "diversion_rate_pct": 16.7,
+      "diversion_gap_pct": 13.3
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 2019.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 1009.0,
+        "energy_mwh_per_year": 12112.0,
+        "apartments_powered_per_month": 1122.0,
+        "co2_avoided_tons_per_month": 291.0,
+        "co2_avoided_tons_per_year": 3488.0
+      },
+      "nearest_ad_facility": "Newtown Creek WRRF",
+      "nearest_ad_distance_km": 28.8
+    },
+    "complaints": {
+      "total": 59375,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 1,
+      "ev_ports_within_2km": 2,
+      "composting_sites_within_2km": 0,
+      "nearest_transfer_station": "Staten Island Transfer Station (DSNY)",
+      "nearest_transfer_distance_km": 4.0
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "BK18",
+    "borough": "Brooklyn",
+    "community_district": 18,
+    "centroid_lat": 40.633022,
+    "centroid_lon": -73.914608,
+    "buildings_summary": {
+      "total": 74,
+      "environmental_justice": 25,
+      "pct_ej": 33.8,
+      "solar_ready": 17,
+      "total_solar_potential_kwh_yr": 3142007.0,
+      "avg_solar_per_building_kwh_yr": 42460.0,
+      "pct_roof_good": 5.4,
+      "total_sqft": 4065096.0,
+      "with_energy_data": 68,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 25700,
+      "total_bess_savings_usd_yr": 4604310
+    },
+    "buildings": [
+      {
+        "site": "Brooklyn South 17 and 18 District Garage",
+        "address": "10502 Avenue D",
+        "agency": "DSNY",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 809600.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 301084.0,
+          "avg_total_kwh_mo": 301084.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1988.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 87,
+          "property_type": "889.6"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K515_South Shore Educatiol Campus",
+        "address": "6565 Flatlands Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 649220.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 7392.0,
+          "avg_total_kwh_mo": 7392.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1970.0,
+          "ghg_tons_co2e_yr": 85.0,
+          "year_built": 54,
+          "property_type": "2217.9"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K211",
+        "address": "1001 East 100 St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 276650.0,
+          "avg_elec_kwh_mo": 58131.0,
+          "avg_gas_kwh_mo": 165158.0,
+          "avg_total_kwh_mo": 194223.0,
+          "peak_elec_kwh_mo": 76157.0,
+          "est_peak_kw": 156.5,
+          "est_annual_cost_usd": 153466.0,
+          "seasonality": 0.15,
+          "energy_star_score": -1,
+          "site_eui": 1940.0,
+          "ghg_tons_co2e_yr": 87.0,
+          "year_built": 50,
+          "property_type": "562.04"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K276",
+        "address": "1070 East 83 St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 77000.0,
+        "energy": {
+          "solar_production_kwh_yr": 249590.0,
+          "avg_elec_kwh_mo": 30965.0,
+          "avg_gas_kwh_mo": 72706.0,
+          "avg_total_kwh_mo": 88188.0,
+          "peak_elec_kwh_mo": 51998.0,
+          "est_peak_kw": 106.8,
+          "est_annual_cost_usd": 81749.0,
+          "seasonality": 0.25,
+          "energy_star_score": -1,
+          "site_eui": 1964.0,
+          "ghg_tons_co2e_yr": 89.0,
+          "year_built": 42,
+          "property_type": "344.9"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K251",
+        "address": "1037 East 54th St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 206668.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2164.0,
+          "avg_total_kwh_mo": 2164.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1940.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 206,
+          "property_type": "5.4"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K272",
+        "address": "101-24 Seaview Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 181500.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 3180.0,
+          "avg_total_kwh_mo": 3180.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1955.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 279,
+          "property_type": "6.6"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K115",
+        "address": "1500 East 92nd St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 148225.0,
+          "avg_elec_kwh_mo": 70720.0,
+          "avg_gas_kwh_mo": 160623.0,
+          "avg_total_kwh_mo": 195983.0,
+          "peak_elec_kwh_mo": 88397.0,
+          "est_peak_kw": 181.6,
+          "est_annual_cost_usd": 186702.0,
+          "seasonality": 0.17,
+          "energy_star_score": -1,
+          "site_eui": 1940.0,
+          "ghg_tons_co2e_yr": 53.0,
+          "year_built": 74,
+          "property_type": "787.95"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K203",
+        "address": "5101 Avenue M",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Between Good and Fair",
+        "sqft": 93000.0,
+        "energy": {
+          "solar_production_kwh_yr": 142340.0,
+          "avg_elec_kwh_mo": 31032.0,
+          "avg_gas_kwh_mo": 132932.0,
+          "avg_total_kwh_mo": 148448.0,
+          "peak_elec_kwh_mo": 40598.0,
+          "est_peak_kw": 83.4,
+          "est_annual_cost_usd": 81925.0,
+          "seasonality": 0.21,
+          "energy_star_score": -1,
+          "site_eui": 1929.0,
+          "ghg_tons_co2e_yr": 81.0,
+          "year_built": 60,
+          "property_type": "451.01"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K222",
+        "address": "3301 Quentin Rd",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "Fair",
+        "sqft": 94000.0,
+        "energy": {
+          "solar_production_kwh_yr": 135520.0,
+          "avg_elec_kwh_mo": 42175.0,
+          "avg_gas_kwh_mo": 142177.0,
+          "avg_total_kwh_mo": 163264.0,
+          "peak_elec_kwh_mo": 53405.0,
+          "est_peak_kw": 109.7,
+          "est_annual_cost_usd": 111341.0,
+          "seasonality": 0.12,
+          "energy_star_score": -1,
+          "site_eui": 1930.0,
+          "ghg_tons_co2e_yr": 60.0,
+          "year_built": 79,
+          "property_type": "594.99"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K207",
+        "address": "4011 Fillmore Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "Fair",
+        "sqft": 70000.0,
+        "energy": {
+          "solar_production_kwh_yr": 83160.0,
+          "avg_elec_kwh_mo": 23537.0,
+          "avg_gas_kwh_mo": 79300.0,
+          "avg_total_kwh_mo": 91234.0,
+          "peak_elec_kwh_mo": 30719.0,
+          "est_peak_kw": 63.1,
+          "est_annual_cost_usd": 62137.0,
+          "seasonality": 0.25,
+          "energy_star_score": -1,
+          "site_eui": 1930.0,
+          "ghg_tons_co2e_yr": 82.0,
+          "year_built": 52,
+          "property_type": "324.4"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 5624.0,
+      "paper_recycling_tons_per_month": 645.0,
+      "mgp_recycling_tons_per_month": 493.0,
+      "organics_collected_tons_per_month": 28.0,
+      "total_tons_per_month": 6788.0,
+      "diversion_rate_pct": 16.9,
+      "diversion_gap_pct": 13.1
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 1912.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 956.0,
+        "energy_mwh_per_year": 11472.0,
+        "apartments_powered_per_month": 1062.0,
+        "co2_avoided_tons_per_month": 275.0,
+        "co2_avoided_tons_per_year": 3304.0
+      },
+      "nearest_ad_facility": "Newtown Creek WRRF",
+      "nearest_ad_distance_km": 12.2
+    },
+    "complaints": {
+      "total": 36087,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 20,
+      "ev_ports_within_2km": 24,
+      "composting_sites_within_2km": 2,
+      "nearest_transfer_station": "Action Environmental",
+      "nearest_transfer_distance_km": 4.8
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "BK03",
+    "borough": "Brooklyn",
+    "community_district": 3,
+    "centroid_lat": 40.68837,
+    "centroid_lon": -73.941837,
+    "buildings_summary": {
+      "total": 85,
+      "environmental_justice": 40,
+      "pct_ej": 47.1,
+      "solar_ready": 12,
+      "total_solar_potential_kwh_yr": 2752211.0,
+      "avg_solar_per_building_kwh_yr": 32379.0,
+      "pct_roof_good": 8.2,
+      "total_sqft": 8143166.0,
+      "with_energy_data": 77,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 32500,
+      "total_bess_savings_usd_yr": 5820490
+    },
+    "buildings": [
+      {
+        "site": "K455_Boys and Girls High School",
+        "address": "1700 Fulton St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 555588.0,
+          "avg_elec_kwh_mo": 207301.0,
+          "avg_gas_kwh_mo": 422869.0,
+          "avg_total_kwh_mo": 526519.0,
+          "peak_elec_kwh_mo": 244503.0,
+          "est_peak_kw": 502.4,
+          "est_annual_cost_usd": 547274.0,
+          "seasonality": 0.08,
+          "energy_star_score": -1,
+          "site_eui": 1974.0,
+          "ghg_tons_co2e_yr": 75.0,
+          "year_built": 51,
+          "property_type": "1735.25"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K023",
+        "address": "545 Willoughby Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 309155.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 3173.0,
+          "avg_total_kwh_mo": 3173.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1965.0,
+          "ghg_tons_co2e_yr": 75.0,
+          "year_built": 44,
+          "property_type": "462.5"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K309",
+        "address": "794 Monroe St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 302720.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1962.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 9,
+          "property_type": "0.6"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K026",
+        "address": "1014 Lafayette Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 290521.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2564.0,
+          "avg_total_kwh_mo": 2564.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1955.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 230,
+          "property_type": "7"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K117",
+        "address": "300 Willoughby Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 147000.0,
+        "energy": {
+          "solar_production_kwh_yr": 277200.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2153.0,
+          "avg_total_kwh_mo": 2153.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1968.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 4,
+          "property_type": "0.2"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K005",
+        "address": "820 Hancock St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Between Good and Fair",
+        "sqft": 90000.0,
+        "energy": {
+          "solar_production_kwh_yr": 202730.0,
+          "avg_elec_kwh_mo": 38787.0,
+          "avg_gas_kwh_mo": 9413.0,
+          "avg_total_kwh_mo": 28807.0,
+          "peak_elec_kwh_mo": 53398.0,
+          "est_peak_kw": 109.7,
+          "est_annual_cost_usd": 102398.0,
+          "seasonality": 0.17,
+          "energy_star_score": -1,
+          "site_eui": 1965.0,
+          "ghg_tons_co2e_yr": 71.0,
+          "year_built": 69,
+          "property_type": "624.59"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K044",
+        "address": "432 Monroe St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 200739.0,
+          "avg_elec_kwh_mo": 37160.0,
+          "avg_gas_kwh_mo": 100192.0,
+          "avg_total_kwh_mo": 118772.0,
+          "peak_elec_kwh_mo": 60197.0,
+          "est_peak_kw": 123.7,
+          "est_annual_cost_usd": 98101.0,
+          "seasonality": 0.21,
+          "energy_star_score": -1,
+          "site_eui": 1950.0,
+          "ghg_tons_co2e_yr": 78.0,
+          "year_built": 60,
+          "property_type": "429.44"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K057",
+        "address": "125 Stuyvesant Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 166980.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2564.0,
+          "avg_total_kwh_mo": 2564.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1955.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 230,
+          "property_type": "7"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K003",
+        "address": "50 Jefferson Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 148500.0,
+          "avg_elec_kwh_mo": 27026.0,
+          "avg_gas_kwh_mo": 140605.0,
+          "avg_total_kwh_mo": 154308.0,
+          "peak_elec_kwh_mo": 45678.0,
+          "est_peak_kw": 93.9,
+          "est_annual_cost_usd": 71347.0,
+          "seasonality": 0.25,
+          "energy_star_score": -1,
+          "site_eui": 1948.0,
+          "ghg_tons_co2e_yr": 55.0,
+          "year_built": 76,
+          "property_type": "474.46"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K035",
+        "address": "272 Macdonough St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Fair",
+        "sqft": 113000.0,
+        "energy": {
+          "solar_production_kwh_yr": 135520.0,
+          "avg_elec_kwh_mo": 36834.0,
+          "avg_gas_kwh_mo": 187944.0,
+          "avg_total_kwh_mo": 206621.0,
+          "peak_elec_kwh_mo": 47838.0,
+          "est_peak_kw": 98.3,
+          "est_annual_cost_usd": 97242.0,
+          "seasonality": 0.2,
+          "energy_star_score": -1,
+          "site_eui": 1949.0,
+          "ghg_tons_co2e_yr": 81.0,
+          "year_built": 69,
+          "property_type": "614.39"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 4474.0,
+      "paper_recycling_tons_per_month": 263.0,
+      "mgp_recycling_tons_per_month": 257.0,
+      "organics_collected_tons_per_month": 12.0,
+      "total_tons_per_month": 5006.0,
+      "diversion_rate_pct": 10.5,
+      "diversion_gap_pct": 19.5
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 1521.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 761.0,
+        "energy_mwh_per_year": 9126.0,
+        "apartments_powered_per_month": 845.0,
+        "co2_avoided_tons_per_month": 219.0,
+        "co2_avoided_tons_per_year": 2628.0
+      },
+      "nearest_ad_facility": "Newtown Creek WRRF",
+      "nearest_ad_distance_km": 5.7
+    },
+    "complaints": {
+      "total": 41002,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 31,
+      "ev_ports_within_2km": 37,
+      "composting_sites_within_2km": 67,
+      "nearest_transfer_station": "Waste Management - Varick",
+      "nearest_transfer_distance_km": 2.9
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "BK15",
+    "borough": "Brooklyn",
+    "community_district": 15,
+    "centroid_lat": 40.58888,
+    "centroid_lon": -73.942234,
+    "buildings_summary": {
+      "total": 104,
+      "environmental_justice": 3,
+      "pct_ej": 2.9,
+      "solar_ready": 16,
+      "total_solar_potential_kwh_yr": 2684451.0,
+      "avg_solar_per_building_kwh_yr": 25812.0,
+      "pct_roof_good": 17.3,
+      "total_sqft": 4842406.0,
+      "with_energy_data": 88,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 26800,
+      "total_bess_savings_usd_yr": 4798185
+    },
+    "buildings": [
+      {
+        "site": "K495",
+        "address": "3000 Ave X",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 774180.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2541.0,
+          "avg_total_kwh_mo": 2541.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1958.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 247,
+          "property_type": "6.1"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K043",
+        "address": "1401 Emmons Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 271040.0,
+          "avg_elec_kwh_mo": 64086.0,
+          "avg_gas_kwh_mo": 131752.0,
+          "avg_total_kwh_mo": 163795.0,
+          "peak_elec_kwh_mo": 87196.0,
+          "est_peak_kw": 179.2,
+          "est_annual_cost_usd": 169188.0,
+          "seasonality": 0.2,
+          "energy_star_score": -1,
+          "site_eui": 1965.0,
+          "ghg_tons_co2e_yr": 89.0,
+          "year_built": 46,
+          "property_type": "491.18"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K425",
+        "address": "3787 Bedford Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 239382.0,
+          "avg_elec_kwh_mo": 126550.0,
+          "avg_gas_kwh_mo": 1950.0,
+          "avg_total_kwh_mo": 74264.0,
+          "peak_elec_kwh_mo": 150394.0,
+          "est_peak_kw": 309.0,
+          "est_annual_cost_usd": 334093.0,
+          "seasonality": 0.09,
+          "energy_star_score": -1,
+          "site_eui": 1925.0,
+          "ghg_tons_co2e_yr": 36.0,
+          "year_built": 109,
+          "property_type": "2844.36"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Temporary Building #8",
+        "address": "2101 Oriental Blvd",
+        "agency": "CUNY",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 18187.0,
+        "energy": {
+          "solar_production_kwh_yr": 214720.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2764470.0,
+          "avg_total_kwh_mo": 2764470.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1967.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 145,
+          "property_type": "14685.3"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K014",
+        "address": "2424 Batchelder St",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "Between Good and Fair",
+        "sqft": 139000.0,
+        "energy": {
+          "solar_production_kwh_yr": 208780.0,
+          "avg_elec_kwh_mo": 49828.0,
+          "avg_gas_kwh_mo": 120514.0,
+          "avg_total_kwh_mo": 138733.0,
+          "peak_elec_kwh_mo": 69981.0,
+          "est_peak_kw": 143.8,
+          "est_annual_cost_usd": 131547.0,
+          "seasonality": 0.25,
+          "energy_star_score": -1,
+          "site_eui": 1952.0,
+          "ghg_tons_co2e_yr": 95.0,
+          "year_built": 43,
+          "property_type": "468.22"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "K206",
+        "address": "2200 Gravesend Neck Rd",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 185922.0,
+          "avg_elec_kwh_mo": 34854.0,
+          "avg_gas_kwh_mo": 142382.0,
+          "avg_total_kwh_mo": 158049.0,
+          "peak_elec_kwh_mo": 51198.0,
+          "est_peak_kw": 105.2,
+          "est_annual_cost_usd": 92015.0,
+          "seasonality": 0.25,
+          "energy_star_score": -1,
+          "site_eui": 1925.0,
+          "ghg_tons_co2e_yr": 81.0,
+          "year_built": 55,
+          "property_type": "454.49"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K234",
+        "address": "1875 East 17th St",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 169400.0,
+          "avg_elec_kwh_mo": 64564.0,
+          "avg_gas_kwh_mo": 161913.0,
+          "avg_total_kwh_mo": 194195.0,
+          "peak_elec_kwh_mo": 89996.0,
+          "est_peak_kw": 184.9,
+          "est_annual_cost_usd": 170449.0,
+          "seasonality": 0.18,
+          "energy_star_score": -1,
+          "site_eui": 1938.0,
+          "ghg_tons_co2e_yr": 53.0,
+          "year_built": 67,
+          "property_type": "745.07"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K052",
+        "address": "2675 East 29th St",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 168960.0,
+          "avg_elec_kwh_mo": 42018.0,
+          "avg_gas_kwh_mo": 136362.0,
+          "avg_total_kwh_mo": 157371.0,
+          "peak_elec_kwh_mo": 56958.0,
+          "est_peak_kw": 117.0,
+          "est_annual_cost_usd": 110928.0,
+          "seasonality": 0.16,
+          "energy_star_score": -1,
+          "site_eui": 1949.0,
+          "ghg_tons_co2e_yr": 85.0,
+          "year_built": 55,
+          "property_type": "403.35"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K194",
+        "address": "3117 Avenue W",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 132990.0,
+          "avg_elec_kwh_mo": 47506.0,
+          "avg_gas_kwh_mo": 78964.0,
+          "avg_total_kwh_mo": 103750.0,
+          "peak_elec_kwh_mo": 78797.0,
+          "est_peak_kw": 161.9,
+          "est_annual_cost_usd": 125417.0,
+          "seasonality": 0.31,
+          "energy_star_score": -1,
+          "site_eui": 1999.0,
+          "ghg_tons_co2e_yr": 27.0,
+          "year_built": 77,
+          "property_type": "571.77"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "K278_J.H.S. 278 Marine Park",
+        "address": "1925 Stuart St",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 132858.0,
+          "avg_elec_kwh_mo": 44587.0,
+          "avg_gas_kwh_mo": 8689.0,
+          "avg_total_kwh_mo": 30982.0,
+          "peak_elec_kwh_mo": 67597.0,
+          "est_peak_kw": 138.9,
+          "est_annual_cost_usd": 117710.0,
+          "seasonality": 0.31,
+          "energy_star_score": -1,
+          "site_eui": 1960.0,
+          "ghg_tons_co2e_yr": 85.0,
+          "year_built": 58,
+          "property_type": "730.24"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 4855.0,
+      "paper_recycling_tons_per_month": 629.0,
+      "mgp_recycling_tons_per_month": 396.0,
+      "organics_collected_tons_per_month": 29.0,
+      "total_tons_per_month": 5910.0,
+      "diversion_rate_pct": 18.0,
+      "diversion_gap_pct": 12.0
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 1651.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 825.0,
+        "energy_mwh_per_year": 9904.0,
+        "apartments_powered_per_month": 917.0,
+        "co2_avoided_tons_per_month": 238.0,
+        "co2_avoided_tons_per_year": 2852.0
+      },
+      "nearest_ad_facility": "Newtown Creek WRRF",
+      "nearest_ad_distance_km": 16.7
+    },
+    "complaints": {
+      "total": 32916,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 6,
+      "ev_ports_within_2km": 10,
+      "composting_sites_within_2km": 0,
+      "nearest_transfer_station": "SouthWest Marine Transfer Station (DSNY)",
+      "nearest_transfer_distance_km": 4.5
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "SI02",
+    "borough": "Staten Island",
+    "community_district": 2,
+    "centroid_lat": 40.588701,
+    "centroid_lon": -74.124792,
+    "buildings_summary": {
+      "total": 62,
+      "environmental_justice": 7,
+      "pct_ej": 11.3,
+      "solar_ready": 7,
+      "total_solar_potential_kwh_yr": 2561966.0,
+      "avg_solar_per_building_kwh_yr": 41322.0,
+      "pct_roof_good": 21.0,
+      "total_sqft": 6371614.0,
+      "with_energy_data": 58,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 19600,
+      "total_bess_savings_usd_yr": 3509750
+    },
+    "buildings": [
+      {
+        "site": "R880",
+        "address": "715 Ocean Ter",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 731500.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 0.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 0,
+          "property_type": "nan"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Ocean Breeze Indoor Athletic Facility",
+        "address": "625 Father Capodanno Blvd",
+        "agency": "DPR",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 134522.0,
+        "energy": {
+          "solar_production_kwh_yr": 676720.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 3604.0,
+          "avg_total_kwh_mo": 3604.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 2016.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 18,
+          "property_type": "18.4"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Staten Island 2 District Garage",
+        "address": "2500 Richmond Ave",
+        "agency": "DSNY",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 80000.0,
+        "energy": {
+          "solar_production_kwh_yr": 438680.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 253385.0,
+          "avg_total_kwh_mo": 253385.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1982.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 159,
+          "property_type": "848.6"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R440",
+        "address": "485 Clawson St",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 287133.0,
+          "avg_elec_kwh_mo": 64408.0,
+          "avg_gas_kwh_mo": 188518.0,
+          "avg_total_kwh_mo": 220723.0,
+          "peak_elec_kwh_mo": 87996.0,
+          "est_peak_kw": 180.8,
+          "est_annual_cost_usd": 170038.0,
+          "seasonality": 0.18,
+          "energy_star_score": -1,
+          "site_eui": 1936.0,
+          "ghg_tons_co2e_yr": 81.0,
+          "year_built": 53,
+          "property_type": "795.85"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R069_Daniel D. Tompkins School",
+        "address": "144 Keating Pl",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 223443.0,
+          "avg_elec_kwh_mo": 40086.0,
+          "avg_gas_kwh_mo": 110910.0,
+          "avg_total_kwh_mo": 128259.0,
+          "peak_elec_kwh_mo": 63517.0,
+          "est_peak_kw": 130.5,
+          "est_annual_cost_usd": 105828.0,
+          "seasonality": 0.36,
+          "energy_star_score": -1,
+          "site_eui": 1976.0,
+          "ghg_tons_co2e_yr": 91.0,
+          "year_built": 49,
+          "property_type": "377.67"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R054",
+        "address": "1060 Willowbrook Rd",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 74000.0,
+        "energy": {
+          "solar_production_kwh_yr": 159830.0,
+          "avg_elec_kwh_mo": 29877.0,
+          "avg_gas_kwh_mo": 1606.0,
+          "avg_total_kwh_mo": 16544.0,
+          "peak_elec_kwh_mo": 37598.0,
+          "est_peak_kw": 77.3,
+          "est_annual_cost_usd": 78874.0,
+          "seasonality": 0.15,
+          "energy_star_score": -1,
+          "site_eui": 1950.0,
+          "ghg_tons_co2e_yr": 61.0,
+          "year_built": 65,
+          "property_type": "537.85"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Greenbelt tive Plant Center",
+        "address": "3808 Victory Blvd",
+        "agency": "DPR",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 15180.0,
+        "energy": {
+          "solar_production_kwh_yr": 44660.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 131338.0,
+          "avg_total_kwh_mo": 131338.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1940.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 353,
+          "property_type": "324.8"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 250,
+          "power_kw": 63,
+          "est_annual_savings_usd": 45070
+        }
+      },
+      {
+        "site": "Greenbelt Conservancy Headquarters",
+        "address": "200 Nevada Ave",
+        "agency": "DPR",
+        "ej": false,
+        "roof": "Fair",
+        "sqft": 15600.0,
+        "energy": {
+          "solar_production_kwh_yr": 0.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1921.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 1161,
+          "property_type": "59.1"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 100,
+          "power_kw": 25,
+          "est_annual_savings_usd": 17885
+        }
+      },
+      {
+        "site": "Brielle Ave",
+        "address": "460 Brielle Ave",
+        "agency": "DCAS",
+        "ej": true,
+        "roof": "Unknown",
+        "sqft": 115563.0,
+        "energy": {
+          "solar_production_kwh_yr": 0.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 817996.0,
+          "avg_total_kwh_mo": 817996.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1930.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 52,
+          "property_type": "4840.5"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 100,
+          "power_kw": 25,
+          "est_annual_savings_usd": 17885
+        }
+      },
+      {
+        "site": "R002",
+        "address": "333 Midland Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "Fair",
+        "sqft": 182575.0,
+        "energy": {
+          "solar_production_kwh_yr": 0.0,
+          "avg_elec_kwh_mo": 42776.0,
+          "avg_gas_kwh_mo": 137322.0,
+          "avg_total_kwh_mo": 158710.0,
+          "peak_elec_kwh_mo": 50398.0,
+          "est_peak_kw": 103.6,
+          "est_annual_cost_usd": 112929.0,
+          "seasonality": 0.15,
+          "energy_star_score": -1,
+          "site_eui": 1964.0,
+          "ghg_tons_co2e_yr": 87.0,
+          "year_built": 50,
+          "property_type": "634.8"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 5106.0,
+      "paper_recycling_tons_per_month": 457.0,
+      "mgp_recycling_tons_per_month": 413.0,
+      "organics_collected_tons_per_month": 49.0,
+      "total_tons_per_month": 6025.0,
+      "diversion_rate_pct": 14.7,
+      "diversion_gap_pct": 15.3
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 1736.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 868.0,
+        "energy_mwh_per_year": 10417.0,
+        "apartments_powered_per_month": 964.0,
+        "co2_avoided_tons_per_month": 250.0,
+        "co2_avoided_tons_per_year": 3000.0
+      },
+      "nearest_ad_facility": "Newtown Creek WRRF",
+      "nearest_ad_distance_km": 22.1
+    },
+    "complaints": {
+      "total": 38541,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 5,
+      "ev_ports_within_2km": 9,
+      "composting_sites_within_2km": 1,
+      "nearest_transfer_station": "Staten Island Transfer Station (DSNY)",
+      "nearest_transfer_distance_km": 5.8
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "QN11",
+    "borough": "Queens",
+    "community_district": 11,
+    "centroid_lat": 40.755966,
+    "centroid_lon": -73.7592,
+    "buildings_summary": {
+      "total": 82,
+      "environmental_justice": 24,
+      "pct_ej": 29.3,
+      "solar_ready": 14,
+      "total_solar_potential_kwh_yr": 2473691.0,
+      "avg_solar_per_building_kwh_yr": 30167.0,
+      "pct_roof_good": 14.6,
+      "total_sqft": 4743604.0,
+      "with_energy_data": 46,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 24850,
+      "total_bess_savings_usd_yr": 4451215
+    },
+    "buildings": [
+      {
+        "site": "Queens East 11/13 District Garage",
+        "address": "75-05 Douglaston Pkwy",
+        "agency": "DSNY",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 531828.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 0.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 0,
+          "property_type": "nan"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q405",
+        "address": "32-24 Corp Kennedy St",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 502458.0,
+          "avg_elec_kwh_mo": 96157.0,
+          "avg_gas_kwh_mo": 72293.0,
+          "avg_total_kwh_mo": 120371.0,
+          "peak_elec_kwh_mo": 128795.0,
+          "est_peak_kw": 264.6,
+          "est_annual_cost_usd": 253855.0,
+          "seasonality": 0.2,
+          "energy_star_score": -1,
+          "site_eui": 1935.0,
+          "ghg_tons_co2e_yr": 98.0,
+          "year_built": 57,
+          "property_type": "1216.84"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q025",
+        "address": "34-65 192nd St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 234531.0,
+          "avg_elec_kwh_mo": 71108.0,
+          "avg_gas_kwh_mo": 6278.0,
+          "avg_total_kwh_mo": 42848.0,
+          "peak_elec_kwh_mo": 96796.0,
+          "est_peak_kw": 198.9,
+          "est_annual_cost_usd": 187726.0,
+          "seasonality": 0.22,
+          "energy_star_score": -1,
+          "site_eui": 1951.0,
+          "ghg_tons_co2e_yr": 76.0,
+          "year_built": 68,
+          "property_type": "881.92"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q213",
+        "address": "231-02 67 Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 197670.0,
+          "avg_elec_kwh_mo": 26194.0,
+          "avg_gas_kwh_mo": 63.0,
+          "avg_total_kwh_mo": 18916.0,
+          "peak_elec_kwh_mo": 31039.0,
+          "est_peak_kw": 63.8,
+          "est_annual_cost_usd": 69153.0,
+          "seasonality": 0.16,
+          "energy_star_score": -1,
+          "site_eui": 1955.0,
+          "ghg_tons_co2e_yr": 65.0,
+          "year_built": 67,
+          "property_type": "504.44"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q205",
+        "address": "75-25 Bell Blvd",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 169400.0,
+          "avg_elec_kwh_mo": 39552.0,
+          "avg_gas_kwh_mo": 31668.0,
+          "avg_total_kwh_mo": 50947.0,
+          "peak_elec_kwh_mo": 55838.0,
+          "est_peak_kw": 114.7,
+          "est_annual_cost_usd": 104416.0,
+          "seasonality": 0.24,
+          "energy_star_score": -1,
+          "site_eui": 1954.0,
+          "ghg_tons_co2e_yr": 59.0,
+          "year_built": 64,
+          "property_type": "406.29"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q074",
+        "address": "61-15 Oceania St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 157872.0,
+          "avg_elec_kwh_mo": 53323.0,
+          "avg_gas_kwh_mo": 2445.0,
+          "avg_total_kwh_mo": 24509.0,
+          "peak_elec_kwh_mo": 68397.0,
+          "est_peak_kw": 140.5,
+          "est_annual_cost_usd": 140772.0,
+          "seasonality": 0.14,
+          "energy_star_score": -1,
+          "site_eui": 1953.0,
+          "ghg_tons_co2e_yr": 75.0,
+          "year_built": 55,
+          "property_type": "657.36"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q046",
+        "address": "64-45 218th St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 136620.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 4326.0,
+          "avg_total_kwh_mo": 4326.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1951.0,
+          "ghg_tons_co2e_yr": 82.0,
+          "year_built": 69,
+          "property_type": "415.9"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q130",
+        "address": "200-01 42 Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 126632.0,
+          "avg_elec_kwh_mo": 39969.0,
+          "avg_gas_kwh_mo": 1422.0,
+          "avg_total_kwh_mo": 22582.0,
+          "peak_elec_kwh_mo": 53038.0,
+          "est_peak_kw": 109.0,
+          "est_annual_cost_usd": 105519.0,
+          "seasonality": 0.19,
+          "energy_star_score": -1,
+          "site_eui": 1924.0,
+          "ghg_tons_co2e_yr": 52.0,
+          "year_built": 79,
+          "property_type": "539.82"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q162",
+        "address": "201-02 53 Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 61000.0,
+        "energy": {
+          "solar_production_kwh_yr": 114730.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 62367.0,
+          "avg_total_kwh_mo": 62367.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1937.0,
+          "ghg_tons_co2e_yr": 17.0,
+          "year_built": 86,
+          "property_type": "419.9"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Science Building",
+        "address": "222-15 56th Ave",
+        "agency": "CUNY",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 171204.0,
+        "energy": {
+          "solar_production_kwh_yr": 82280.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1970.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 0,
+          "property_type": "0"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 3404.0,
+      "paper_recycling_tons_per_month": 551.0,
+      "mgp_recycling_tons_per_month": 327.0,
+      "organics_collected_tons_per_month": 55.0,
+      "total_tons_per_month": 4337.0,
+      "diversion_rate_pct": 21.5,
+      "diversion_gap_pct": 8.5
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 1157.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 579.0,
+        "energy_mwh_per_year": 6944.0,
+        "apartments_powered_per_month": 643.0,
+        "co2_avoided_tons_per_month": 167.0,
+        "co2_avoided_tons_per_year": 2000.0
+      },
+      "nearest_ad_facility": "Hunts Point WRRF",
+      "nearest_ad_distance_km": 11.1
+    },
+    "complaints": {
+      "total": 20455,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 0,
+      "ev_ports_within_2km": 0,
+      "composting_sites_within_2km": 1,
+      "nearest_transfer_station": "Regal Recycling",
+      "nearest_transfer_distance_km": 6.1
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "SI01",
+    "borough": "Staten Island",
+    "community_district": 1,
+    "centroid_lat": 40.635159,
+    "centroid_lon": -74.103173,
+    "buildings_summary": {
+      "total": 157,
+      "environmental_justice": 39,
+      "pct_ej": 24.8,
+      "solar_ready": 14,
+      "total_solar_potential_kwh_yr": 2442055.0,
+      "avg_solar_per_building_kwh_yr": 15554.0,
+      "pct_roof_good": 17.8,
+      "total_sqft": 7351672.0,
+      "with_energy_data": 87,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 36950,
+      "total_bess_savings_usd_yr": 6616015
+    },
+    "buildings": [
+      {
+        "site": "Port Richmond WWTP",
+        "address": "1800 Richmond Ter",
+        "agency": "DEP",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 1394250.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 88.0,
+          "avg_total_kwh_mo": 88.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1931.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 57,
+          "property_type": "96.5"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "SI Ferry Maintence Facility - St. George Ferry Termil",
+        "address": "1 Bay St",
+        "agency": "DOT",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 243100.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 386711.0,
+          "avg_total_kwh_mo": 386711.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 2005.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 209,
+          "property_type": "2562.6"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "R045",
+        "address": "58 Lawrence Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 165462.0,
+          "avg_elec_kwh_mo": 33810.0,
+          "avg_gas_kwh_mo": 116563.0,
+          "avg_total_kwh_mo": 133706.0,
+          "peak_elec_kwh_mo": 43598.0,
+          "est_peak_kw": 89.6,
+          "est_annual_cost_usd": 89258.0,
+          "seasonality": 0.19,
+          "energy_star_score": -1,
+          "site_eui": 1930.0,
+          "ghg_tons_co2e_yr": 65.0,
+          "year_built": 66,
+          "property_type": "399.79"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "121st Precinct",
+        "address": "970 Richmond Ave",
+        "agency": "NYPD",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 48797.0,
+        "energy": {
+          "solar_production_kwh_yr": 155870.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 36963.0,
+          "avg_total_kwh_mo": 36963.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 2010.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 122,
+          "property_type": "581.1"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "R445_Port Richmond High School",
+        "address": "85 St. Josephs Ave",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 132858.0,
+          "avg_elec_kwh_mo": 129595.0,
+          "avg_gas_kwh_mo": 372648.0,
+          "avg_total_kwh_mo": 437445.0,
+          "peak_elec_kwh_mo": 193992.0,
+          "est_peak_kw": 398.6,
+          "est_annual_cost_usd": 342130.0,
+          "seasonality": 0.24,
+          "energy_star_score": -1,
+          "site_eui": 1927.0,
+          "ghg_tons_co2e_yr": 57.0,
+          "year_built": 80,
+          "property_type": "1681.32"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "R029",
+        "address": "1581 Victory Blvd",
+        "agency": "DOE",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 106590.0,
+          "avg_elec_kwh_mo": 33687.0,
+          "avg_gas_kwh_mo": 91062.0,
+          "avg_total_kwh_mo": 108638.0,
+          "peak_elec_kwh_mo": 55998.0,
+          "est_peak_kw": 115.1,
+          "est_annual_cost_usd": 88935.0,
+          "seasonality": 0.26,
+          "energy_star_score": -1,
+          "site_eui": 1931.0,
+          "ghg_tons_co2e_yr": 62.0,
+          "year_built": 63,
+          "property_type": "333.43"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "R040",
+        "address": "91 Henderson Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Between Good and Fair",
+        "sqft": 43200.0,
+        "energy": {
+          "solar_production_kwh_yr": 81840.0,
+          "avg_elec_kwh_mo": 34639.0,
+          "avg_gas_kwh_mo": 50352.0,
+          "avg_total_kwh_mo": 67672.0,
+          "peak_elec_kwh_mo": 60477.0,
+          "est_peak_kw": 124.3,
+          "est_annual_cost_usd": 91446.0,
+          "seasonality": 0.25,
+          "energy_star_score": -1,
+          "site_eui": 1925.0,
+          "ghg_tons_co2e_yr": 60.0,
+          "year_built": 97,
+          "property_type": "335.48"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      },
+      {
+        "site": "Lyons Pool and Recreation Center",
+        "address": "317 Bay St",
+        "agency": "DPR",
+        "ej": true,
+        "roof": "Between Good and Fair",
+        "sqft": 24000.0,
+        "energy": {
+          "solar_production_kwh_yr": 76230.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 0.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 0,
+          "property_type": "nan"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      },
+      {
+        "site": "Mariner's Harbor Library",
+        "address": "206 South Ave",
+        "agency": "NYPL",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 10100.0,
+        "energy": {
+          "solar_production_kwh_yr": 54010.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 0.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 0,
+          "property_type": "nan"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      },
+      {
+        "site": "Bldg A/Staten Island Museum",
+        "address": "1000 Richmond Ter",
+        "agency": "DCLA",
+        "ej": false,
+        "roof": "Good",
+        "sqft": 24448.0,
+        "energy": {
+          "solar_production_kwh_yr": 16830.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1855.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 0,
+          "property_type": "0"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 250,
+          "power_kw": 63,
+          "est_annual_savings_usd": 45070
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 6124.0,
+      "paper_recycling_tons_per_month": 584.0,
+      "mgp_recycling_tons_per_month": 518.0,
+      "organics_collected_tons_per_month": 62.0,
+      "total_tons_per_month": 7289.0,
+      "diversion_rate_pct": 15.7,
+      "diversion_gap_pct": 14.3
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 2082.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 1041.0,
+        "energy_mwh_per_year": 12493.0,
+        "apartments_powered_per_month": 1157.0,
+        "co2_avoided_tons_per_month": 300.0,
+        "co2_avoided_tons_per_year": 3598.0
+      },
+      "nearest_ad_facility": "Newtown Creek WRRF",
+      "nearest_ad_distance_km": 17.2
+    },
+    "complaints": {
+      "total": 53249,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 16,
+      "ev_ports_within_2km": 24,
+      "composting_sites_within_2km": 6,
+      "nearest_transfer_station": "Waste Connections - 50th St",
+      "nearest_transfer_distance_km": 7.3
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "QN12",
+    "borough": "Queens",
+    "community_district": 12,
+    "centroid_lat": 40.695422,
+    "centroid_lon": -73.784216,
+    "buildings_summary": {
+      "total": 107,
+      "environmental_justice": 53,
+      "pct_ej": 49.5,
+      "solar_ready": 12,
+      "total_solar_potential_kwh_yr": 2177351.0,
+      "avg_solar_per_building_kwh_yr": 20349.0,
+      "pct_roof_good": 18.7,
+      "total_sqft": 8526522.0,
+      "with_energy_data": 95,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 38500,
+      "total_bess_savings_usd_yr": 6897165
+    },
+    "buildings": [
+      {
+        "site": "Q400",
+        "address": "156-10 Baisley Blvd",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 392161.0,
+          "avg_elec_kwh_mo": 93564.0,
+          "avg_gas_kwh_mo": 155027.0,
+          "avg_total_kwh_mo": 194856.0,
+          "peak_elec_kwh_mo": 117115.0,
+          "est_peak_kw": 240.6,
+          "est_annual_cost_usd": 247009.0,
+          "seasonality": 0.19,
+          "energy_star_score": -1,
+          "site_eui": 1942.0,
+          "ghg_tons_co2e_yr": 61.0,
+          "year_built": 71,
+          "property_type": "1329.88"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q192",
+        "address": "109-89 204th St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 336996.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1960.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 115,
+          "property_type": "5.3"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q030",
+        "address": "126-10 Bedell St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 281633.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 6348.0,
+          "avg_total_kwh_mo": 6348.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1966.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 451,
+          "property_type": "12.6"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q072_Catherine & Count Basie Middle School 72",
+        "address": "133-25 Guy R Brewer Blvd",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 273735.0,
+          "avg_elec_kwh_mo": 49265.0,
+          "avg_gas_kwh_mo": 7282.0,
+          "avg_total_kwh_mo": 33363.0,
+          "peak_elec_kwh_mo": 64397.0,
+          "est_peak_kw": 132.3,
+          "est_annual_cost_usd": 130059.0,
+          "seasonality": 0.18,
+          "energy_star_score": -1,
+          "site_eui": 1966.0,
+          "ghg_tons_co2e_yr": 81.0,
+          "year_built": 53,
+          "property_type": "839.09"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q008",
+        "address": "108-35 167th St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 260337.0,
+          "avg_elec_kwh_mo": 94440.0,
+          "avg_gas_kwh_mo": 7477.0,
+          "avg_total_kwh_mo": 54697.0,
+          "peak_elec_kwh_mo": 140794.0,
+          "est_peak_kw": 289.3,
+          "est_annual_cost_usd": 249323.0,
+          "seasonality": 0.27,
+          "energy_star_score": -1,
+          "site_eui": 1960.0,
+          "ghg_tons_co2e_yr": 66.0,
+          "year_built": 74,
+          "property_type": "1102.96"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "Q136",
+        "address": "201-15 115 Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 150920.0,
+          "avg_elec_kwh_mo": 13886.0,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 13886.0,
+          "peak_elec_kwh_mo": 35599.0,
+          "est_peak_kw": 73.1,
+          "est_annual_cost_usd": 36659.0,
+          "seasonality": 0.62,
+          "energy_star_score": -1,
+          "site_eui": 2000.0,
+          "ghg_tons_co2e_yr": 93.0,
+          "year_built": 30,
+          "property_type": "52.99"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q223",
+        "address": "125-20 Sutphin Blvd",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 102000.0,
+        "energy": {
+          "solar_production_kwh_yr": 140140.0,
+          "avg_elec_kwh_mo": 69230.0,
+          "avg_gas_kwh_mo": 1659.0,
+          "avg_total_kwh_mo": 36274.0,
+          "peak_elec_kwh_mo": 90396.0,
+          "est_peak_kw": 185.7,
+          "est_annual_cost_usd": 182768.0,
+          "seasonality": 0.14,
+          "energy_star_score": -1,
+          "site_eui": 1981.0,
+          "ghg_tons_co2e_yr": 23.0,
+          "year_built": 71,
+          "property_type": "774.02"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q116",
+        "address": "107-25 Wren Pl",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 116886.0,
+          "avg_elec_kwh_mo": 31408.0,
+          "avg_gas_kwh_mo": 124185.0,
+          "avg_total_kwh_mo": 140812.0,
+          "peak_elec_kwh_mo": 55998.0,
+          "est_peak_kw": 115.1,
+          "est_annual_cost_usd": 82916.0,
+          "seasonality": 0.3,
+          "energy_star_score": -1,
+          "site_eui": 1930.0,
+          "ghg_tons_co2e_yr": 61.0,
+          "year_built": 66,
+          "property_type": "432.82"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q015",
+        "address": "121-15 Lucas St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 100947.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2231.0,
+          "avg_total_kwh_mo": 2231.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1940.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 196,
+          "property_type": "5"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Q035",
+        "address": "191-02 90 Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 98000.0,
+        "energy": {
+          "solar_production_kwh_yr": 90090.0,
+          "avg_elec_kwh_mo": 102385.0,
+          "avg_gas_kwh_mo": 128418.0,
+          "avg_total_kwh_mo": 179611.0,
+          "peak_elec_kwh_mo": 154394.0,
+          "est_peak_kw": 317.2,
+          "est_annual_cost_usd": 270295.0,
+          "seasonality": 0.17,
+          "energy_star_score": -1,
+          "site_eui": 1931.0,
+          "ghg_tons_co2e_yr": 12.0,
+          "year_built": 77,
+          "property_type": "711.51"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 7037.0,
+      "paper_recycling_tons_per_month": 470.0,
+      "mgp_recycling_tons_per_month": 600.0,
+      "organics_collected_tons_per_month": 50.0,
+      "total_tons_per_month": 8158.0,
+      "diversion_rate_pct": 13.6,
+      "diversion_gap_pct": 16.4
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 2393.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 1196.0,
+        "energy_mwh_per_year": 14356.0,
+        "apartments_powered_per_month": 1329.0,
+        "co2_avoided_tons_per_month": 345.0,
+        "co2_avoided_tons_per_year": 4134.0
+      },
+      "nearest_ad_facility": "Hunts Point WRRF",
+      "nearest_ad_distance_km": 14.5
+    },
+    "complaints": {
+      "total": 58170,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 31,
+      "ev_ports_within_2km": 42,
+      "composting_sites_within_2km": 5,
+      "nearest_transfer_station": "Regal Recycling",
+      "nearest_transfer_distance_km": 1.1
+    },
+    "ai_analysis": ""
+  },
+  {
+    "district_code": "BX09",
+    "borough": "Bronx",
+    "community_district": 9,
+    "centroid_lat": 40.826027,
+    "centroid_lon": -73.863099,
+    "buildings_summary": {
+      "total": 58,
+      "environmental_justice": 24,
+      "pct_ej": 41.4,
+      "solar_ready": 11,
+      "total_solar_potential_kwh_yr": 2100417.0,
+      "avg_solar_per_building_kwh_yr": 36214.0,
+      "pct_roof_good": 20.7,
+      "total_sqft": 3932724.0,
+      "with_energy_data": 50,
+      "with_energy_star": 0,
+      "total_bess_capacity_kwh": 24750,
+      "total_bess_savings_usd_yr": 4434760
+    },
+    "buildings": [
+      {
+        "site": "X450",
+        "address": "1980 Lafayette Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 774730.0,
+          "avg_elec_kwh_mo": 157379.0,
+          "avg_gas_kwh_mo": 9530.0,
+          "avg_total_kwh_mo": 90468.0,
+          "peak_elec_kwh_mo": 190592.0,
+          "est_peak_kw": 391.6,
+          "est_annual_cost_usd": 415481.0,
+          "seasonality": 0.15,
+          "energy_star_score": -1,
+          "site_eui": 1968.0,
+          "ghg_tons_co2e_yr": 85.0,
+          "year_built": 53,
+          "property_type": "2054.87"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "X125",
+        "address": "1111 Pugsley Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 298584.0,
+          "avg_elec_kwh_mo": 44620.0,
+          "avg_gas_kwh_mo": 2948.0,
+          "avg_total_kwh_mo": 28943.0,
+          "peak_elec_kwh_mo": 54398.0,
+          "est_peak_kw": 111.8,
+          "est_annual_cost_usd": 117798.0,
+          "seasonality": 0.17,
+          "energy_star_score": -1,
+          "site_eui": 1951.0,
+          "ghg_tons_co2e_yr": 92.0,
+          "year_built": 46,
+          "property_type": "603.22"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "X131_J.H.S. 131 Albert Einstein",
+        "address": "885 Bolton Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 220088.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": 2977.0,
+          "avg_total_kwh_mo": 2977.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": 0.0,
+          "energy_star_score": -1,
+          "site_eui": 1965.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 275,
+          "property_type": "6.5"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 1000,
+          "power_kw": 250,
+          "est_annual_savings_usd": 178850
+        }
+      },
+      {
+        "site": "X102",
+        "address": "1827 Archer St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Between Good and Fair",
+        "sqft": 141000.0,
+        "energy": {
+          "solar_production_kwh_yr": 179300.0,
+          "avg_elec_kwh_mo": 97351.0,
+          "avg_gas_kwh_mo": 203292.0,
+          "avg_total_kwh_mo": 256393.0,
+          "peak_elec_kwh_mo": 123995.0,
+          "est_peak_kw": 254.8,
+          "est_annual_cost_usd": 257008.0,
+          "seasonality": 0.15,
+          "energy_star_score": -1,
+          "site_eui": 1931.0,
+          "ghg_tons_co2e_yr": 55.0,
+          "year_built": 79,
+          "property_type": "921.24"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "X100",
+        "address": "800 Taylor Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 148390.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 1960.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 117,
+          "property_type": "18.1"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "X093",
+        "address": "1535 Story Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 133408.0,
+          "avg_elec_kwh_mo": 32434.0,
+          "avg_gas_kwh_mo": 117342.0,
+          "avg_total_kwh_mo": 133559.0,
+          "peak_elec_kwh_mo": 75917.0,
+          "est_peak_kw": 156.0,
+          "est_annual_cost_usd": 85626.0,
+          "seasonality": 0.31,
+          "energy_star_score": -1,
+          "site_eui": 1929.0,
+          "ghg_tons_co2e_yr": 60.0,
+          "year_built": 78,
+          "property_type": "464.63"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "X036",
+        "address": "1070 Castle Hill Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 85260.0,
+        "energy": {
+          "solar_production_kwh_yr": 84370.0,
+          "avg_elec_kwh_mo": 30799.0,
+          "avg_gas_kwh_mo": 110247.0,
+          "avg_total_kwh_mo": 124115.0,
+          "peak_elec_kwh_mo": 43198.0,
+          "est_peak_kw": 88.8,
+          "est_annual_cost_usd": 81309.0,
+          "seasonality": 0.15,
+          "energy_star_score": -1,
+          "site_eui": 1901.0,
+          "ghg_tons_co2e_yr": 80.0,
+          "year_built": 68,
+          "property_type": "379.24"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      },
+      {
+        "site": "X077",
+        "address": "1250 Ward Ave",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 107000.0,
+        "energy": {
+          "solar_production_kwh_yr": 83270.0,
+          "avg_elec_kwh_mo": 80152.0,
+          "avg_gas_kwh_mo": 6918.0,
+          "avg_total_kwh_mo": 54221.0,
+          "peak_elec_kwh_mo": 141674.0,
+          "est_peak_kw": 291.1,
+          "est_annual_cost_usd": 211602.0,
+          "seasonality": 0.26,
+          "energy_star_score": -1,
+          "site_eui": 1925.0,
+          "ghg_tons_co2e_yr": 85.0,
+          "year_built": 50,
+          "property_type": "694.68"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 750,
+          "power_kw": 188,
+          "est_annual_savings_usd": 134495
+        }
+      },
+      {
+        "site": "Bronx River Greenway River House",
+        "address": "1490 Sheridan Expy",
+        "agency": "DPR",
+        "ej": false,
+        "roof": "nan",
+        "sqft": 0.0,
+        "energy": {
+          "solar_production_kwh_yr": 75537.0,
+          "avg_elec_kwh_mo": null,
+          "avg_gas_kwh_mo": null,
+          "avg_total_kwh_mo": 0.0,
+          "peak_elec_kwh_mo": 0.0,
+          "est_peak_kw": 0.0,
+          "est_annual_cost_usd": 0.0,
+          "seasonality": null,
+          "energy_star_score": -1,
+          "site_eui": 0.0,
+          "ghg_tons_co2e_yr": 0.0,
+          "year_built": 0,
+          "property_type": "nan"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      },
+      {
+        "site": "X047",
+        "address": "1794 East 172 St",
+        "agency": "DOE",
+        "ej": true,
+        "roof": "Good",
+        "sqft": 100925.0,
+        "energy": {
+          "solar_production_kwh_yr": 63360.0,
+          "avg_elec_kwh_mo": 43798.0,
+          "avg_gas_kwh_mo": 85083.0,
+          "avg_total_kwh_mo": 107291.0,
+          "peak_elec_kwh_mo": 55838.0,
+          "est_peak_kw": 114.7,
+          "est_annual_cost_usd": 115627.0,
+          "seasonality": 0.14,
+          "energy_star_score": -1,
+          "site_eui": 1911.0,
+          "ghg_tons_co2e_yr": 57.0,
+          "year_built": 69,
+          "property_type": "496.13"
+        },
+        "bess_recommendation": {
+          "capacity_kwh": 500,
+          "power_kw": 125,
+          "est_annual_savings_usd": 89425
+        }
+      }
+    ],
+    "waste": {
+      "refuse_tons_per_month": 4454.0,
+      "paper_recycling_tons_per_month": 192.0,
+      "mgp_recycling_tons_per_month": 253.0,
+      "organics_collected_tons_per_month": 6.0,
+      "total_tons_per_month": 4905.0,
+      "diversion_rate_pct": 9.4,
+      "diversion_gap_pct": 20.6
+    },
+    "waste_to_energy": {
+      "organics_in_refuse_tons_per_month": 1514.0,
+      "if_diverted_to_AD": {
+        "energy_mwh_per_month": 757.0,
+        "energy_mwh_per_year": 9087.0,
+        "apartments_powered_per_month": 841.0,
+        "co2_avoided_tons_per_month": 218.0,
+        "co2_avoided_tons_per_year": 2617.0
+      },
+      "nearest_ad_facility": "Hunts Point WRRF",
+      "nearest_ad_distance_km": 2.1
+    },
+    "complaints": {
+      "total": 19429,
+      "missed_collection": 0,
+      "overflow": 0,
+      "illegal_dumping": 0,
+      "dirty_conditions": 0
+    },
+    "infrastructure": {
+      "ev_stations_within_2km": 29,
+      "ev_ports_within_2km": 44,
+      "composting_sites_within_2km": 12,
+      "nearest_transfer_station": "Waste Management - Harlem River Yard",
+      "nearest_transfer_distance_km": 6.0
+    },
+    "ai_analysis": ""
+  }
+]

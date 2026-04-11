@@ -7,7 +7,27 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { useDashboard } from '../../context/DashboardContext';
 import { ENERGY_SITES, NEXUS_SITES, scoreColor } from '../../data/sites';
 import { BOROUGH_POLYGONS, EJ_POLYGONS, WASTE_DISTRICT_POINTS } from '../../data/districts';
-import { TOP10_DISTRICTS_GEOJSON } from '../../data/top10Districts';
+import districtData from '../../data/top10_district_analysis.json';
+
+/** Build GeoJSON from top10_district_analysis.json at module load time */
+const TOP10_DISTRICTS_GEOJSON = {
+  type: 'FeatureCollection',
+  features: districtData.map((d, i) => ({
+    type: 'Feature',
+    properties: {
+      rank: i + 1,
+      code: d.district_code,
+      borough: d.borough,
+      district: d.community_district,
+      solar_kwh_yr: d.buildings_summary.total_solar_potential_kwh_yr,
+      bess_savings_usd: d.buildings_summary.total_bess_savings_usd_yr,
+      buildings: d.buildings_summary.total,
+      solar_ready: d.buildings_summary.solar_ready,
+      pct_ej: d.buildings_summary.pct_ej,
+    },
+    geometry: { type: 'Point', coordinates: [d.centroid_lon, d.centroid_lat] },
+  })),
+};
 import MapLegend from './MapLegend';
 import MapControls from './MapControls';
 
