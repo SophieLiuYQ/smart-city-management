@@ -1,0 +1,356 @@
+import { useRef, useCallback, useMemo, useState } from 'react';
+import Map, { Source, Layer, Popup, NavigationControl } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
+
+import { useDashboard } from '../../context/DashboardContext';
+import { ENERGY_SITES, NEXUS_SITES, scoreColor } from '../../data/sites';
+import { BOROUGH_POLYGONS, EJ_POLYGONS, WASTE_DISTRICT_POINTS } from '../../data/districts';
+import MapLegend from './MapLegend';
+import MapControls from './MapControls';
+
+/**
+ * Dark raster tile style using CARTO Dark Matter — free, no API key required.
+ * All vector data layers are added on top via MapLibre Source/Layer.
+ */
+const DARK_MAP_STYLE = {
+  version: 8,
+  sources: {
+    'carto-dark': {
+      type: 'raster',
+      tiles: ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'],
+      tileSize: 256,
+      attribution: '© CARTO © OpenStreetMap contributors',
+    },
+  },
+  layers: [{ id: 'carto-dark-layer', type: 'raster', source: 'carto-dark' }],
+};
+
+/** Build GeoJSON FeatureCollections from the site arrays */
+function buildEnergyGeoJSON(sites) {
+  return {
+    type: 'FeatureCollection',
+    features: sites.map(s => ({
+      type: 'Feature',
+      properties: { ...s },
+      geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
+    })),
+  };
+}
+
+function buildNexusGeoJSON(sites) {
+  return {
+    type: 'FeatureCollection',
+    features: sites.map(s => ({
+      type: 'Feature',
+      properties: { ...s },
+      geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
+    })),
+  };
+}
+
+/** Layer paint expressions */
+const ENERGY_CIRCLE_LAYER = {
+  id: 'energy-sites',
+  type: 'circle',
+  source: 'energy-sites',
+  paint: {
+    'circle-radius': ['interpolate', ['linear'], ['get', 'nexusScore'], 88, 7, 95, 10, 100, 13],
+    'circle-color': [
+      'case',
+      ['>=', ['get', 'nexusScore'], 95], '#EF4444',
+      ['>=', ['get', 'nexusScore'], 90], '#F59E0B',
+      '#3B82F6',
+    ],
+    'circle-opacity': 0.9,
+    'circle-stroke-color': 'rgba(255,255,255,0.15)',
+    'circle-stroke-width': 1,
+  },
+};
+
+const ENERGY_CIRCLE_SELECTED = {
+  id: 'energy-sites-selected',
+  type: 'circle',
+  source: 'energy-sites',
+  filter: ['==', ['get', 'id'], -1], // updated dynamically
+  paint: {
+    'circle-radius': ['interpolate', ['linear'], ['get', 'score'], 50, 10, 100, 16],
+    'circle-color': 'transparent',
+    'circle-stroke-color': '#fff',
+    'circle-stroke-width': 2,
+  },
+};
+
+const WASTE_FILL_LAYER = {
+  id: 'borough-fill',
+  type: 'fill',
+  source: 'boroughs',
+  paint: {
+    'fill-color': [
+      'interpolate', ['linear'],
+      ['get', 'wasteTons'],
+      28000, 'rgba(249,115,22,0.08)',
+      45000, 'rgba(249,115,22,0.20)',
+      65000, 'rgba(249,115,22,0.35)',
+    ],
+    'fill-outline-color': 'rgba(249,115,22,0.4)',
+  },
+};
+
+const WASTE_CIRCLES_LAYER = {
+  id: 'waste-districts',
+  type: 'circle',
+  source: 'waste-districts',
+  paint: {
+    'circle-radius': ['interpolate', ['linear'], ['get', 'ref'], 7000, 10, 12500, 20],
+    'circle-color': [
+      'case',
+      ['>=', ['get', 'score'], 80], '#EF4444',
+      ['>=', ['get', 'score'], 70], '#F59E0B',
+      '#3B82F6',
+    ],
+    'circle-opacity': 0.85,
+    'circle-stroke-color': '#0B1120',
+    'circle-stroke-width': 1.5,
+  },
+};
+
+const NEXUS_HEATMAP_LAYER = {
+  id: 'nexus-heatmap',
+  type: 'heatmap',
+  source: 'nexus-sites',
+  paint: {
+    'heatmap-weight': ['interpolate', ['linear'], ['get', 'nScore'], 80, 0.4, 100, 1],
+    'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 9, 0.8, 12, 2],
+    'heatmap-color': [
+      'interpolate', ['linear'], ['heatmap-density'],
+      0,    'rgba(139,92,246,0)',
+      0.2,  'rgba(139,92,246,0.3)',
+      0.5,  'rgba(139,92,246,0.6)',
+      0.8,  'rgba(168,85,247,0.85)',
+      1,    'rgba(192,132,252,1)',
+    ],
+    'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 9, 40, 12, 80],
+    'heatmap-opacity': 0.8,
+  },
+};
+
+const EJ_FILL_LAYER = {
+  id: 'ej-areas',
+  type: 'fill',
+  source: 'ej-areas',
+  paint: {
+    'fill-color': 'rgba(139,92,246,0.06)',
+    'fill-outline-color': 'rgba(139,92,246,0.5)',
+  },
+};
+
+export default function CityMap() {
+  const mapRef = useRef(null);
+  const { viewMode, selectedId, selectSite, borough, minScore } = useDashboard();
+  const [popup, setPopup] = useState(null); // { lng, lat, content }
+
+  /** Filter energy sites by borough + minScore */
+  const filteredEnergySites = useMemo(() =>
+    ENERGY_SITES.filter(s =>
+      (borough === 'All Boroughs' || s.borough === borough) && s.score >= minScore
+    ), [borough, minScore]);
+
+  const energyGeoJSON     = useMemo(() => buildEnergyGeoJSON(filteredEnergySites), [filteredEnergySites]);
+  const nexusGeoJSON      = useMemo(() => buildNexusGeoJSON(NEXUS_SITES), []);
+  const wasteDistrictData = useMemo(() => WASTE_DISTRICT_POINTS, []);
+
+  /** FlyTo selected site */
+  const flyToSite = useCallback((site) => {
+    mapRef.current?.flyTo({
+      center: [site.lng, site.lat],
+      zoom: 14,
+      duration: 900,
+      essential: true,
+    });
+  }, []);
+
+  const onMapClick = useCallback((e) => {
+    if (!mapRef.current) return;
+    const map = mapRef.current.getMap();
+
+    // Energy mode — click on energy sites
+    if (viewMode === 'energy') {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['energy-sites'] });
+      if (features.length) {
+        const props = features[0].properties;
+        selectSite(props.id);
+        flyToSite({ lng: props.lng, lat: props.lat });
+        setPopup(null);
+      } else {
+        setPopup(null);
+      }
+    }
+
+    // Waste mode — click on district circles
+    if (viewMode === 'waste') {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['waste-districts'] });
+      if (features.length) {
+        const p = features[0].properties;
+        const coords = features[0].geometry.coordinates;
+        setPopup({
+          lng: coords[0], lat: coords[1],
+          content: (
+            <div>
+              <div style={{ fontWeight: 700, marginBottom: 4, color: '#F1F5F9' }}>{p.name} — {p.borough}</div>
+              <div style={{ color: '#94A3B8' }}>Refuse: <span style={{ color: '#F59E0B' }}>{Number(p.ref).toLocaleString()} t/mo</span></div>
+              <div style={{ color: '#94A3B8' }}>Diversion: <span style={{ color: '#10B981' }}>{p.diversion}%</span></div>
+              <div style={{ color: '#94A3B8' }}>311 Complaints: <span style={{ color: '#FCA5A5' }}>{Number(p.complaints).toLocaleString()}</span></div>
+              <div style={{ color: '#94A3B8' }}>Organic Potential: <span style={{ color: '#C4B5FD' }}>{p.organic}</span></div>
+            </div>
+          ),
+        });
+      }
+    }
+
+    // Nexus mode — click
+    if (viewMode === 'nexus') {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['nexus-heatmap'] });
+      if (features.length === 0) setPopup(null);
+    }
+  }, [viewMode, selectSite, flyToSite]);
+
+  const onMouseMove = useCallback((e) => {
+    if (!mapRef.current) return;
+    const map = mapRef.current.getMap();
+
+    if (viewMode === 'energy') {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['energy-sites'] });
+      map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+
+      if (features.length) {
+        const p = features[0].properties;
+        const coords = features[0].geometry.coordinates;
+        setPopup({
+          lng: coords[0], lat: coords[1],
+          content: (
+            <div>
+              <div style={{ fontWeight: 700, marginBottom: 4, color: '#F1F5F9' }}>{p.name}</div>
+              <div style={{ color: '#94A3B8', marginBottom: 2 }}>{p.borough} · {p.agency}</div>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <span style={{ color: scoreColor(p.nexusScore), fontWeight: 700, fontSize: 14 }}>{p.nexusScore}</span>
+                <span style={{ color: '#64748B', fontSize: 11 }}>nexus score</span>
+              </div>
+              <div style={{ color: '#6EE7B7', marginTop: 2 }}>Savings: {p.savings}/yr</div>
+              {p.ej && <div style={{ marginTop: 3 }}><span style={{ background: 'rgba(16,185,129,.15)', color: '#6EE7B7', padding: '1px 6px', borderRadius: 20, fontSize: 10 }}>EJ Area</span></div>}
+            </div>
+          ),
+        });
+      } else {
+        setPopup(null);
+      }
+    }
+  }, [viewMode]);
+
+  /** Selected site highlight filter */
+  const selectedFilter = useMemo(() => ['==', ['get', 'id'], selectedId], [selectedId]);
+
+  /** Geocoder search — fly to a site by name match */
+  const handleSearch = useCallback((query) => {
+    const q = query.toLowerCase();
+    const match = ENERGY_SITES.find(s =>
+      s.name.toLowerCase().includes(q) || s.borough.toLowerCase().includes(q)
+    );
+    if (match) {
+      selectSite(match.id);
+      flyToSite(match);
+    }
+  }, [selectSite, flyToSite]);
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 12, overflow: 'hidden', background: '#0B1120' }}>
+      <Map
+        ref={mapRef}
+        mapStyle={DARK_MAP_STYLE}
+        initialViewState={{ longitude: -73.94, latitude: 40.71, zoom: 10.2 }}
+        style={{ width: '100%', height: '100%' }}
+        onClick={onMapClick}
+        onMouseMove={onMouseMove}
+        interactiveLayerIds={viewMode === 'energy' ? ['energy-sites'] : viewMode === 'waste' ? ['waste-districts'] : []}
+        attributionControl={false}
+        logoPosition="bottom-right"
+      >
+        {/* Navigation controls */}
+        <NavigationControl position="top-right" showCompass={false} />
+
+        {/* ── BOROUGH FILL (Waste + Nexus modes) ── */}
+        {(viewMode === 'waste' || viewMode === 'nexus') && (
+          <Source id="boroughs" type="geojson" data={BOROUGH_POLYGONS}>
+            <Layer {...WASTE_FILL_LAYER} />
+          </Source>
+        )}
+
+        {/* ── EJ AREAS (Nexus mode only) ── */}
+        {viewMode === 'nexus' && (
+          <Source id="ej-areas" type="geojson" data={EJ_POLYGONS}>
+            <Layer {...EJ_FILL_LAYER} />
+          </Source>
+        )}
+
+        {/* ── ENERGY SITES (Energy mode) ── */}
+        {viewMode === 'energy' && (
+          <Source id="energy-sites" type="geojson" data={energyGeoJSON}>
+            <Layer {...ENERGY_CIRCLE_LAYER} />
+            <Layer
+              {...ENERGY_CIRCLE_SELECTED}
+              filter={selectedFilter}
+              paint={{
+                ...ENERGY_CIRCLE_SELECTED.paint,
+                'circle-radius': 16,
+              }}
+            />
+          </Source>
+        )}
+
+        {/* ── WASTE DISTRICT CIRCLES (Waste mode) ── */}
+        {viewMode === 'waste' && (
+          <Source id="waste-districts" type="geojson" data={wasteDistrictData}>
+            <Layer {...WASTE_CIRCLES_LAYER} />
+          </Source>
+        )}
+
+        {/* ── NEXUS HEATMAP (Nexus mode) ── */}
+        {viewMode === 'nexus' && (
+          <Source id="nexus-sites" type="geojson" data={nexusGeoJSON}>
+            <Layer {...NEXUS_HEATMAP_LAYER} />
+          </Source>
+        )}
+
+        {/* ── HOVER POPUP ── */}
+        {popup && (
+          <Popup
+            longitude={popup.lng}
+            latitude={popup.lat}
+            closeButton={false}
+            closeOnClick={false}
+            anchor="bottom"
+            offset={16}
+          >
+            {popup.content}
+          </Popup>
+        )}
+      </Map>
+
+      {/* Map title overlay */}
+      <div style={{
+        position: 'absolute', top: 10, left: 10, zIndex: 10,
+        background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)',
+        padding: '5px 10px', borderRadius: 8,
+        fontSize: 11, fontWeight: 500, color: '#CBD5E1',
+        pointerEvents: 'none',
+      }}>
+        NYC Municipal Sites — {viewMode === 'energy' ? 'Priority Map' : viewMode === 'waste' ? 'Waste Flow' : 'Nexus Intelligence'}
+      </div>
+
+      {/* Search bar */}
+      <MapControls onSearch={handleSearch} />
+
+      {/* Legend */}
+      <MapLegend />
+    </div>
+  );
+}
