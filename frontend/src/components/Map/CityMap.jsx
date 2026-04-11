@@ -354,7 +354,7 @@ export default function CityMap() {
         content: (
           <div>
             <div style={{ fontWeight: 700, marginBottom: 4, color: 'black' }}>
-              #{p.rank} {p.code} — {p.borough} CD{p.district}
+              {p.address}
             </div>
             <div style={{ color: '#FDE047', marginBottom: 4, fontSize: 12 }}>
               ☀ Solar Potential: {Number(p.solar_kwh_yr).toLocaleString()} kWh/yr

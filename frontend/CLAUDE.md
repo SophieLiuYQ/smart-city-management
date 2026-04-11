@@ -52,13 +52,13 @@ src/
 │   ├── lenis-provider.tsx      # Lenis smooth scroll context provider
 │   ├── theradyme-landing.tsx   # Landing page component
 │   ├── Map/
-│   │   ├── CityMap.jsx         # MapLibre GL map — 3 layer modes (Energy/Waste/Nexus)
+│   │   ├── CityMap.jsx         # MapLibre GL map — 3 layer modes + district/building overlays
 │   │   ├── MapLegend.jsx       # Dynamic legend per viewMode
 │   │   └── MapControls.jsx     # Live geocoder search over ENERGY_SITES array
 │   ├── Sidebar.jsx             # View toggle pills, nav, borough/score/budget/EJ filters
 │   ├── Header.jsx              # Breadcrumb, status pills
 │   ├── KPIRibbon.jsx           # 4 KPI cards, switches content with viewMode
-│   ├── RankingsTable.jsx       # 3-schema table (energy/waste/nexus), row click → selectSite
+│   ├── RankingsTable.jsx       # Top 10 districts table with collapsible building rows
 │   ├── SiteDetail.jsx          # 3-col panel: identity / score rings / BESS + AI insight
 │   ├── FlowVisualization.jsx   # SVG Sankey flows (Energy + Waste side by side)
 │   ├── Simulation.jsx          # Tabbed: BESS Dispatch / Waste Forecast / Scenario Planner
@@ -68,7 +68,14 @@ src/
 ├── hooks/
 │   └── useViewMode.js          # Re-exports useDashboard from context
 └── data/
-    ├── top50_scored_xgboost.json  # Real XGBoost-scored site data (50 sites)
+    ├── top50_scored_xgboost.json       # Real XGBoost-scored site data (50 sites)
+    ├── top10_district_analysis.json    # Top 10 districts by solar potential — full data including
+    │                                   #   buildings (10 per district), centroid lat/lng,
+    │                                   #   buildings_summary, waste, complaints, ai_analysis.
+    │                                   #   Each building has latitude + longitude fields.
+    │                                   #   Single source of truth for district map layers and table.
+    ├── districtBuildings.js    # DEPRECATED — superseded by top10_district_analysis.json
+    ├── top10Districts.js       # DEPRECATED — superseded by top10_district_analysis.json
     ├── sites.js                # Imports JSON, transforms → ENERGY_SITES, WASTE_SITES, NEXUS_SITES,
     │                           #   BOROUGH_DATA, KPI arrays, score helpers
     ├── districts.js            # Borough + EJ GeoJSON polygons for MapLibre layers
@@ -112,6 +119,22 @@ Changing `viewMode` via `changeView()` also auto-switches `simTab`.
 
 **lat/lng** are derived deterministically in `sites.js` using golden-ratio scatter within each borough's bounding box. They are **not** in the raw JSON.
 
+### District data (`top10_district_analysis.json`)
+Top 10 NYC community districts ranked by `total_solar_potential_kwh_yr`. Derived from `data/gold/district_analysis.json` in the repo root. This is the **single source of truth** for all district and building map layers and the RankingsTable.
+
+Top-level fields per district:
+- `district_code`, `borough`, `community_district`
+- `centroid_lat`, `centroid_lon` — real geographic centroid used for map markers
+- `buildings_summary` — `total`, `solar_ready`, `total_solar_potential_kwh_yr`, `total_bess_savings_usd_yr`, `pct_ej`
+- `buildings` — array of up to 10 buildings (top 10 by solar potential)
+- `waste`, `waste_to_energy`, `complaints`, `infrastructure`, `ai_analysis`
+
+Building fields:
+- `site`, `address`, `agency`, `ej` (bool), `roof`, `sqft`
+- `latitude`, `longitude` — real geocoded coordinates for map plotting
+- `energy` — `solar_production_kwh_yr`, `est_annual_cost_usd`, `ghg_tons_co2e_yr`, etc.
+- `bess_recommendation` — `capacity_kwh`, `power_kw`, `est_annual_savings_usd`
+
 ### Score thresholds (real data range 88–98)
 | Range | Color | Meaning |
 |---|---|---|
@@ -123,13 +146,19 @@ Helper functions in `sites.js`: `scoreColor(s)`, `scoreBg(s)`, `scoreText(s)`.
 
 ## Map Layers
 
-Three modes driven by `viewMode`:
+Three modes driven by `viewMode`, plus two permanent overlays visible in all modes:
 
 | Mode | Layers |
 |---|---|
 | **Energy** | Circle layer — radius + color by `nexusScore`. White ring on `selectedId`. Hover popup. |
 | **Waste** | Borough fill choropleth (orange intensity by `wasteTons`) + district circles (size by refuse tonnage) |
 | **Nexus** | Borough fill + EJ area fill (purple outlined) + heatmap by `nexusScore` |
+| **All modes** | Gold ring district centroid markers (rank label 1–10) from `top10_district_analysis.json` |
+| **All modes** | Building dots (5px) — emerald green for EJ, sky blue for non-EJ — from `top10_district_analysis.json` |
+
+Hover popup priority: building dot → district centroid → energy site.
+
+GeoJSON for district centroids (`TOP10_DISTRICTS_GEOJSON`) and building points (`DISTRICT_BUILDINGS_GEOJSON`) are both built at module load time in `CityMap.jsx` from the imported JSON — no runtime fetch.
 
 Map tile style defined inline as a MapLibre style object in `CityMap.jsx` — CARTO Dark Matter raster, no external style JSON file.
 
