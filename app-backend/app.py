@@ -51,6 +51,7 @@ async def classify_image(
         )
         
         # 3. Return the validated JSON structure
+        print(response.message.content)
         return ImageAnalysis.model_validate_json(response.message.content)
         
     except Exception as e:

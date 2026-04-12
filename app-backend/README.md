@@ -89,3 +89,7 @@ You can modify the model used by editing the `MODEL` variable in `main.py`:
   "description": "A close-up photo of a ginger tabby cat sitting on a wooden porch during sunset."
 }
 ```
+
+
+curl -X POST http://127.0.0.1:8001/classify \
+     -F "file=@/path/to/your/image.jpg"
