@@ -180,7 +180,7 @@ export default function RankingsTable() {
   };
 
   return (
-    <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, overflow: 'hidden', display: 'flex', flexDirection: 'column', flex: 1 }}>
+    <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, overflow: 'hidden', height: 480 }}>
       {/* Header */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -195,8 +195,7 @@ export default function RankingsTable() {
         </span>
       </div>
 
-      {/* Scrollable table */}
-      <div style={{ overflowY: 'auto', flex: 1 }}>
+      <div style={{ height: 435, overflowY: 'auto' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr>
