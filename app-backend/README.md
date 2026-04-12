@@ -33,7 +33,7 @@ pip install fastapi uvicorn ollama python-multipart
 Start the FastAPI application using Uvicorn:
 
 ```bash
-uvicorn main:app --reload
+python -m uvicorn app:app --reload
 ```
 *The server will start at `http://127.0.0.1:8000`.*
 

@@ -4,8 +4,9 @@ from typing import List
 from typing import Optional, List, Literal
 import dotenv
 import os
+from dotenv import load_dotenv
 
-dotenv.load()
+load_dotenv()
 
 MODEL = os.getenv("MODEL")
 

@@ -6,8 +6,9 @@ from typing import Optional
 from pydantic import BaseModel
 import dotenv
 import os
+from dotenv import load_dotenv
 
-dotenv.load()
+load_dotenv()
 
 app = FastAPI()
 # MODEL = "qwen3.5"
