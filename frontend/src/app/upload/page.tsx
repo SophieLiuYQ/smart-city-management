@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Map, { NavigationControl } from 'react-map-gl/maplibre';
 import type { MapRef } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -74,6 +74,12 @@ function CommentIcon() {
 export default function UploadPage() {
   const [viewMode, setViewMode] = useState<ViewMode>('3D');
   const [llm, setLlm] = useState(LLM_OPTIONS[0]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 4500);
+    return () => clearTimeout(t);
+  }, []);
   const mapRef = useRef<MapRef>(null);
 
   const handleModeChange = useCallback((mode: ViewMode) => {
@@ -189,12 +195,31 @@ export default function UploadPage() {
         <div style={{ position: 'relative', height: 520, background: '#FAFAFA' }}>
 
           {/* Main image area */}
-          <div style={{ position: 'absolute', inset: 0 }}>
-            <img
-              src="/img2.jpeg"
-              alt="Site photo"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA' }}>
+            {loading ? (
+              <>
+                <style>{`
+                  @keyframes spin { to { transform: rotate(360deg); } }
+                `}</style>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
+                  <div style={{
+                    width: 40, height: 40, borderRadius: '50%',
+                    border: '3px solid #E2E8F0',
+                    borderTopColor: '#0F172A',
+                    animation: 'spin 0.8s linear infinite',
+                  }} />
+                  <span style={{ fontSize: 12, color: '#94A3B8', letterSpacing: '0.04em' }}>
+                    Analyzing image…
+                  </span>
+                </div>
+              </>
+            ) : (
+              <img
+                src="/img2.jpeg"
+                alt="Site photo"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            )}
           </div>
 
           {/* Status label */}
@@ -217,7 +242,7 @@ export default function UploadPage() {
           </div>
 
           {/* ── TAGS — bottom left ── */}
-          <div style={{
+          {!loading && <div style={{
             position: 'absolute',
             bottom: 14,
             left: 14,
@@ -243,10 +268,10 @@ export default function UploadPage() {
                 {label}
               </span>
             ))}
-          </div>
+          </div>}
 
           {/* ── MAP INSET — bottom right ── */}
-          <div style={{
+          {!loading && <div style={{
             position: 'absolute',
             bottom: 14,
             right: 14,
@@ -284,7 +309,7 @@ export default function UploadPage() {
             }}>
               {viewMode}
             </div>
-          </div>
+          </div>}
         </div>
 
       </div>

@@ -18,7 +18,7 @@ function Dashboard() {
       {/* <Sidebar /> */}
 
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-        {/* <Header /> */}
+        <Header />
 
         <main style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 20, flex: 1 }}>
           {/* <KPIRibbon /> */}
