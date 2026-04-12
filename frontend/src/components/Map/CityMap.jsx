@@ -259,7 +259,7 @@ const BUILDING_CIRCLE_LAYER = {
   source: 'district-buildings',
   paint: {
     'circle-radius': 5,
-    'circle-color': ['case', ['==', ['get', 'ej'], true], '#10B981', '#38BDF8'],
+    'circle-color': '#10B981',
     'circle-opacity': 0.85,
     'circle-stroke-color': '#0B1120',
     'circle-stroke-width': 1,
