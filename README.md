@@ -209,3 +209,6 @@ Built for [Spark Hack NYC 2026](https://luma.com/spark-hack-nyc) — Environment
 ##Finetuning sources
 https://www.kaggle.com/datasets/mostafaabla/garbage-classification
 https://universe.roboflow.com/garbage-detection-czeg5/garbage_detection-wvzwv
+nvidia--NVIDIA-Nemotron-Nano-12B-v2-VL-FP8 model fine tuned with LoRA
+both data sets were partitioned into organics, electronic, plastic, others in folders
+
