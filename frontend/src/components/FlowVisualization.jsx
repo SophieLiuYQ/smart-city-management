@@ -54,11 +54,23 @@ function FlowNode({ x, y, w = 80, h = 28, label, value, color = '#94A3B8' }) {
   );
 }
 
-function FlowPath({ x1, y1, x2, y2, h = 12, color = '#64748B', opacity = 0.3 }) {
+function FlowPath({ x1, y1, x2, y2, h = 12, color = '#64748B', opacity = 0.3, animDelay = 0 }) {
   const mx = (x1 + x2) / 2;
   const d = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2} L${x2},${y2 + h} C${mx},${y2 + h} ${mx},${y1 + h} ${x1},${y1 + h} Z`;
+  const peak = Math.min(opacity * 2.4, 0.6);
   return (
-    <path d={d} fill={color} opacity={opacity} />
+    <path d={d} fill={color}>
+      <animate
+        attributeName="opacity"
+        values={`${opacity};${peak};${opacity}`}
+        dur="2.8s"
+        begin={`${animDelay}s`}
+        repeatCount="indefinite"
+        calcMode="spline"
+        keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+        keyTimes="0;0.5;1"
+      />
+    </path>
   );
 }
 
@@ -74,6 +86,7 @@ function EnergyFlow() {
               x1={80} y1={src.y + 4 + di * 4}
               x2={185} y2={sec.y + 4 + si * 3}
               h={6} color={src.color} opacity={0.2}
+              animDelay={(si * 2 + di) * 0.18}
             />
           ))
         )}
@@ -84,6 +97,7 @@ function EnergyFlow() {
               x1={275} y1={sec.y + 4 + di * 3}
               x2={360} y2={use.y + 4 + si * 4}
               h={5} color={E_SOURCES[si % 4].color} opacity={0.18}
+              animDelay={0.7 + (si * 2 + di) * 0.18}
             />
           ))
         )}
@@ -111,6 +125,7 @@ function WasteFlow() {
               x1={80} y1={src.y + 4 + di * 4}
               x2={185} y2={col.y + 4 + si * 3}
               h={6} color={src.color} opacity={0.2}
+              animDelay={(si * 2 + di) * 0.18}
             />
           ))
         )}
@@ -121,6 +136,7 @@ function WasteFlow() {
               x1={275} y1={col.y + 4 + di * 3}
               x2={360} y2={dest.y + 4 + si * 4}
               h={5} color={W_DESTS[si % 4].color} opacity={0.2}
+              animDelay={0.7 + (si * 2 + di) * 0.18}
             />
           ))
         )}

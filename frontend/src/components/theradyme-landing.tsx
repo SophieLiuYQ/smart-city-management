@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import EntryFormPopup from "./EntryFormPopup";
 
 const NAV_ITEMS = [
   { href: "/map", label: "Research" },
@@ -69,18 +70,13 @@ const getWifiStrength = () => {
 export function SmartCityManagmentLanding() {
   const [estTime, setEstTime] = useState("--:--");
   const [wifiStrength, setWifiStrength] = useState("--");
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    const updateTime = () => {
-      setEstTime(getNewYorkTime());
-    };
-
+    const updateTime = () => setEstTime(getNewYorkTime());
     updateTime();
     const intervalId = window.setInterval(updateTime, 30_000);
-
-    return () => {
-      window.clearInterval(intervalId);
-    };
+    return () => window.clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -101,9 +97,13 @@ export function SmartCityManagmentLanding() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowPopup(true);
   };
 
   return (
+    <>
+      <EntryFormPopup open={showPopup} onClose={() => setShowPopup(false)} />
+
     <div className="overflow-x-hidden bg-canvas">
       <main className={`mx-auto w-full max-w-[1440px] ${shellPadding} pt-3 sm:pt-4`}>
         {/* ── HERO GRID ── */}
@@ -345,5 +345,6 @@ export function SmartCityManagmentLanding() {
         </div>
       </section>
     </div>
+    </>
   );
 }

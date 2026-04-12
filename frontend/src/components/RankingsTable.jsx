@@ -1,10 +1,42 @@
 'use client';
 
-import { useState } from 'react';
-import { TOP10_DISTRICTS_GEOJSON } from '../data/top10Districts';
-import { DISTRICT_BUILDINGS } from '../data/districtBuildings';
+import { useState, Fragment } from 'react';
+import districtData from '../data/top10_district_analysis.json';
+import { useDashboard } from '../context/DashboardContext';
 
-const districts = TOP10_DISTRICTS_GEOJSON.features.map(f => f.properties);
+/* ── derived data from the single source of truth ── */
+const districts = districtData.map((d, i) => ({
+  rank: i + 1,
+  code: d.district_code,
+  district: d.community_district,
+  borough: d.borough,
+  solar_kwh_yr: d.buildings_summary.total_solar_potential_kwh_yr,
+  bess_savings_usd: d.buildings_summary.total_bess_savings_usd_yr,
+  buildings: d.buildings_summary.total,
+  solar_ready: d.buildings_summary.solar_ready,
+  pct_ej: d.buildings_summary.pct_ej,
+  centroid_lat: d.centroid_lat,
+  centroid_lon: d.centroid_lon,
+}));
+
+const buildingsMap = Object.fromEntries(
+  districtData.map(d => [
+    d.district_code,
+    d.buildings.map(b => ({
+      site: b.site,
+      address: b.address,
+      agency: b.agency,
+      ej: b.ej,
+      solar_kwh_yr: b.energy?.solar_production_kwh_yr,
+      annual_cost_usd: b.energy?.est_annual_cost_usd,
+      ghg_co2: b.energy?.ghg_tons_co2e_yr,
+      bess_kwh: b.bess_recommendation?.capacity_kwh,
+      bess_savings_usd: b.bess_recommendation?.est_annual_savings_usd,
+      lat: b.latitude,
+      lng: b.longitude,
+    })),
+  ])
+);
 
 /* ── style constants ── */
 const TH = {
@@ -33,21 +65,19 @@ function fmtUsd(n) {
   return `$${n}`;
 }
 
-/* ── building sub-table rendered inside an expanded district row ── */
-function BuildingsPanel({ code }) {
-  const slice = DISTRICT_BUILDINGS[code] ?? [];
-  const total = slice.length;
+/* ── building sub-table ── */
+function BuildingsPanel({ code, onBuildingClick }) {
+  const slice = buildingsMap[code] ?? [];
 
   return (
     <tr>
-      <td colSpan={8} style={{ padding: 0, background: '#F8FAFC' }}>
+      <td colSpan={9} style={{ padding: 0, background: '#F8FAFC' }}>
         <div style={{ padding: '10px 14px 14px' }}>
-          {/* sub-header */}
           <div style={{
             fontSize: 10, fontWeight: 600, color: '#64748B',
             letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8,
           }}>
-            {total} Buildings · {code}
+            {slice.length} Buildings · {code}
           </div>
 
           <div style={{ overflowX: 'auto' }}>
@@ -69,7 +99,14 @@ function BuildingsPanel({ code }) {
                 {slice.map((b, i) => (
                   <tr
                     key={i}
-                    style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(241,245,249,.5)' }}
+                    onClick={() => b.lat != null && b.lng != null && onBuildingClick(b)}
+                    style={{
+                      background: i % 2 === 0 ? 'transparent' : 'rgba(241,245,249,.5)',
+                      cursor: b.lat != null && b.lng != null ? 'pointer' : 'default',
+                      transition: 'background 0.1s',
+                    }}
+                    onMouseEnter={e => { if (b.lat != null) e.currentTarget.style.background = 'rgba(16,185,129,0.06)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = i % 2 === 0 ? 'transparent' : 'rgba(241,245,249,.5)'; }}
                   >
                     <td style={{ ...BTD, fontWeight: 500, color: '#334155', maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
                         title={b.site}>{b.site || '—'}</td>
@@ -107,7 +144,6 @@ function BuildingsPanel({ code }) {
               </tbody>
             </table>
           </div>
-
         </div>
       </td>
     </tr>
@@ -117,11 +153,34 @@ function BuildingsPanel({ code }) {
 /* ── main component ── */
 export default function RankingsTable() {
   const [expanded, setExpanded] = useState(null);
+  const { selectItem, setFlyToCoords } = useDashboard();
 
-  const toggle = (code) => setExpanded(prev => prev === code ? null : code);
+  const flyTo = (lat, lng, zoom) =>
+    setFlyToCoords({ lat, lng, zoom, _t: Date.now() });
+
+  const handleDistrictClick = (d) => {
+    setExpanded(prev => prev === d.code ? null : d.code);
+    if (d.centroid_lat != null && d.centroid_lon != null) {
+      flyTo(d.centroid_lat, d.centroid_lon, 13);
+      selectItem('district', {
+        rank: d.rank, code: d.code, district: d.district, borough: d.borough,
+        solar_kwh_yr: d.solar_kwh_yr, bess_savings_usd: d.bess_savings_usd,
+        buildings: d.buildings, solar_ready: d.solar_ready, pct_ej: d.pct_ej,
+      });
+    }
+  };
+
+  const handleBuildingClick = (b) => {
+    flyTo(b.lat, b.lng, 16);
+    selectItem('building', {
+      site: b.site, address: b.address, agency: b.agency, ej: b.ej,
+      solar_kwh_yr: b.solar_kwh_yr, annual_cost_usd: b.annual_cost_usd,
+      ghg_co2: b.ghg_co2, bess_kwh: b.bess_kwh, bess_savings_usd: b.bess_savings_usd,
+    });
+  };
 
   return (
-    <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, overflow: 'hidden', display: 'flex', flexDirection: 'column', flex: 1 }}>
+    <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, overflow: 'hidden', height: 480 }}>
       {/* Header */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -136,8 +195,7 @@ export default function RankingsTable() {
         </span>
       </div>
 
-      {/* Scrollable table */}
-      <div style={{ overflowY: 'auto', flex: 1 }}>
+      <div style={{ height: 435, overflowY: 'auto' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr>
@@ -156,11 +214,9 @@ export default function RankingsTable() {
             {districts.map((d) => {
               const isOpen = expanded === d.code;
               return (
-                <>
-                  {/* District summary row */}
+                <Fragment key={d.code}>
                   <tr
-                    key={d.code}
-                    onClick={() => toggle(d.code)}
+                    onClick={() => handleDistrictClick(d)}
                     style={{
                       cursor: 'pointer',
                       background: isOpen ? 'rgba(234,179,8,.06)' : 'transparent',
@@ -253,8 +309,14 @@ export default function RankingsTable() {
                   </tr>
 
                   {/* Collapsible buildings panel */}
-                  {isOpen && <BuildingsPanel key={`${d.code}-panel`} code={d.code} />}
-                </>
+                  {isOpen && (
+                    <BuildingsPanel
+                      key={`${d.code}-panel`}
+                      code={d.code}
+                      onBuildingClick={handleBuildingClick}
+                    />
+                  )}
+                </Fragment>
               );
             })}
           </tbody>

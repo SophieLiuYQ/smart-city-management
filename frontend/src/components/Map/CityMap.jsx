@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useCallback, useMemo, useState } from 'react';
+import { useRef, useCallback, useMemo, useState, useEffect } from 'react';
 import Map, { Source, Layer, Popup, NavigationControl } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -230,7 +230,7 @@ const DISTRICT_LABEL_LAYER = {
 
 export default function CityMap() {
   const mapRef = useRef(null);
-  const { viewMode, selectedId, selectSite, selectItem } = useDashboard();
+  const { viewMode, selectedId, selectSite, selectItem, flyToCoords } = useDashboard();
   const [popup, setPopup] = useState(null); // { lng, lat, content }
 
   const nexusGeoJSON = useMemo(() => ({
@@ -242,6 +242,17 @@ export default function CityMap() {
     })),
   }), []);
   const wasteDistrictData = useMemo(() => WASTE_DISTRICT_POINTS, []);
+
+  /** Fly to coords triggered from outside the map (e.g. RankingsTable click) */
+  useEffect(() => {
+    if (!flyToCoords || !mapRef.current) return;
+    mapRef.current.flyTo({
+      center: [flyToCoords.lng, flyToCoords.lat],
+      zoom: flyToCoords.zoom ?? 14,
+      duration: 1000,
+      essential: true,
+    });
+  }, [flyToCoords]);
 
   /** FlyTo selected site */
   const flyToSite = useCallback((site) => {
