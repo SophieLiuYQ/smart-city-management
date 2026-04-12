@@ -30,11 +30,11 @@ function Dashboard() {
             }}>
               Site Distribution &amp; Rankings
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 14, alignItems: 'stretch' }}>
-              <div style={{ aspectRatio: '4/3', minHeight: 360 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 14 }}>
+              <div style={{ height: 480 }}>
                 <CityMap />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ height: 480, display: 'flex', flexDirection: 'column' }}>
                 <RankingsTable />
               </div>
             </div>

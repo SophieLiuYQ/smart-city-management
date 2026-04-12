@@ -13,6 +13,7 @@ export function DashboardProvider({ children }) {
   const [ejPriority, setEjPriority] = useState(true);
   const [simTab, setSimTab]         = useState('bess');      // 'bess' | 'waste' | 'scenario'
   const [selectedItem, setSelectedItem] = useState(null);   // { type: 'building'|'district'|'highlight', data: {} }
+  const [flyToCoords, setFlyToCoords] = useState(null);     // { lat, lng, zoom, _t }
 
   // Scenario planner state
   const [scenario, setScenario] = useState({
@@ -43,6 +44,7 @@ export function DashboardProvider({ children }) {
       viewMode, changeView,
       selectedId, selectSite,
       selectedItem, selectItem,
+      flyToCoords, setFlyToCoords,
       borough, setBorough,
       minScore, setMinScore,
       budget, setBudget,
