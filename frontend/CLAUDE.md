@@ -24,7 +24,7 @@ npm run lint    # ESLint
 | Fonts | Michroma (`--font-display`), IBM Plex Mono (`--font-mono-ui`) via `next/font/google` |
 | Scroll | Lenis smooth scroll — wrapped in `LenisProvider` in `layout.tsx` |
 | Map | MapLibre GL JS 5 + react-map-gl 8 (`import Map from 'react-map-gl/maplibre'`) |
-| Map tiles | CARTO Light Matter raster tiles — **free, no API key** |
+| Map tiles | CARTO Light Matter raster tiles (`CityMap.jsx`) + OpenFreeMap `liberty` vector tiles (`upload/page.tsx`) — both free, no API key |
 | Charts | Custom hand-rolled SVG — no recharts |
 | State | React Context (`DashboardContext`) — no Zustand/Redux |
 
@@ -34,7 +34,7 @@ npm run lint    # ESLint
 |---|---|---|
 | `/` | `src/app/page.tsx` | Landing page — `SmartCityManagmentLanding` component |
 | `/map` | `src/app/map/page.tsx` | Full NYC Smart City dashboard (map + all 6 sections) |
-| `/upload` | `src/app/upload/page.tsx` | Result viewer — 2D/3D toggle, building preview, comment icon |
+| `/upload` | `src/app/upload/page.tsx` | Result viewer — main image area (placeholder when empty) + MapLibre 3D map inset pinned to bottom-right, comment icon |
 
 ## Project Structure
 
@@ -50,7 +50,7 @@ src/
 │       └── page.tsx            # Result viewer page
 ├── components/
 │   ├── lenis-provider.tsx      # Lenis smooth scroll context provider
-│   ├── theradyme-landing.tsx   # Landing page component
+│   ├── theradyme-landing.tsx   # Landing page component — "Begin →" opens EntryForm popup (photo upload, site name, location, borough, date/time, notes); "Save entry ↗" navigates to /upload
 │   ├── Map/
 │   │   ├── CityMap.jsx         # MapLibre GL map — 3 layer modes + district/building overlays
 │   │   ├── MapLegend.jsx       # Dynamic legend per viewMode
@@ -60,7 +60,7 @@ src/
 │   ├── KPIRibbon.jsx           # 4 KPI cards, switches content with viewMode
 │   ├── RankingsTable.jsx       # Top 10 districts table with collapsible building rows
 │   ├── SiteDetail.jsx          # 3-col detail panel — renders based on selectedItem type from context
-│   ├── FlowVisualization.jsx   # SVG Sankey flows (Energy + Waste side by side)
+│   ├── FlowVisualization.jsx   # SVG Sankey flows (Energy + Waste side by side) — each band has SVG <animate> opacity pulse with staggered delays to simulate left-to-right flow
 │   ├── Simulation.jsx          # Tabbed: BESS Dispatch / Waste Forecast / Scenario Planner
 │   └── BoroughComparison.jsx   # Horizontal grouped bar + 5 borough summary cards
 ├── context/
@@ -93,7 +93,8 @@ src/
 - Data files (`src/data/`) are plain JS modules — no `'use client'` needed
 - Import alias `@/` maps to `src/` (configured in `tsconfig.json`)
 - Pages are `.tsx`; dashboard components are `.jsx` (JSX only, no TypeScript types enforced in components)
-- MapLibre CSS must be imported at the page level: `import 'maplibre-gl/dist/maplibre-gl.css'`
+- MapLibre CSS must be imported at the page/component level: `import 'maplibre-gl/dist/maplibre-gl.css'`
+- `upload/page.tsx` imports MapLibre CSS directly (not via a layout) because it is the only non-dashboard page using a map
 
 ## Shared State (DashboardContext)
 
@@ -186,6 +187,9 @@ Hover popup priority: highlight stars → building dots → district centroids �
 GeoJSON objects (`TOP10_DISTRICTS_GEOJSON`, `DISTRICT_BUILDINGS_GEOJSON`, `HIGHLIGHT_BUILDINGS_GEOJSON`) are all built at module load time in `CityMap.jsx` from imported JSON — no runtime fetch.
 
 Map tile style defined inline as a MapLibre style object in `CityMap.jsx` — CARTO Light Matter raster tiles.
+
+### Upload page map (`upload/page.tsx`)
+Separate MapLibre instance — **not** connected to `DashboardContext`. Uses OpenFreeMap `liberty` vector style (`https://tiles.openfreemap.org/styles/liberty`) which includes building footprints for 3D extrusion. Rendered as a 360×260px inset pinned to the bottom-right of the canvas area. Initial view: Midtown Manhattan, pitch 60°, bearing −20°, zoom 15.5. The 2D/3D toggle (currently commented out in the header) calls `mapRef.current?.easeTo()` to animate pitch/bearing. `VIEW_2D = { pitch: 0, bearing: 0, zoom: 14.5 }`, `VIEW_3D = { pitch: 60, bearing: −20, zoom: 15.5 }`.
 
 ## Styling Conventions
 

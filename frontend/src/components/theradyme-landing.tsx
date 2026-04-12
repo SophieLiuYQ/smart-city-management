@@ -80,10 +80,31 @@ export function SmartCityManagmentLanding() {
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handlePhoto = (file: File) => {
-    setForm((f) => ({ ...f, photo: file }));
     const reader = new FileReader();
     reader.onload = (ev) => setPhotoPreview(ev.target?.result as string);
     reader.readAsDataURL(file);
+
+    // Simulate extracting metadata from the image
+    const mockMeta = {
+      siteName: "PS 123 Mahalia Jackson School",
+      location: "40 W 112th St, New York, NY 10026",
+      borough: "Manhattan",
+      date: new Date().toLocaleDateString("en-US", {
+        timeZone: "America/New_York",
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+      }),
+      time: new Date().toLocaleTimeString("en-US", {
+        timeZone: "America/New_York",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }),
+      notes: "Mixed recyclables detected: paper, cardboard, bubble wrap. Bin overflow observed on north side.",
+    };
+
+    setForm((f) => ({ ...f, photo: file, ...mockMeta }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

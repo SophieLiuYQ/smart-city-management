@@ -1,10 +1,36 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
+import Map, { NavigationControl } from 'react-map-gl/maplibre';
+import type { MapRef } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 type ViewMode = '2D' | '3D';
 
-// Minimal inline SVG icons
+const LLM_OPTIONS = [
+  'Qwen 3.5',
+  'GPT-4o',
+  'Claude Sonnet 4.5',
+  'Gemini 1.5 Pro',
+  'Llama 3.3 70B',
+  'Mistral Large',
+];
+
+const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+
+const INITIAL_VIEW = {
+  longitude: -73.9857,
+  latitude: 40.7549,
+  zoom: 15.5,
+  pitch: 60,
+  bearing: -20,
+};
+
+const VIEW_2D = { pitch: 0, bearing: 0, zoom: 14.5 };
+const VIEW_3D = { pitch: 60, bearing: -20, zoom: 15.5 };
+
+// ── Icons ──────────────────────────────────────────────────────────────────
+
 function CheckCircleIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="1.8">
@@ -42,30 +68,24 @@ function CommentIcon() {
   );
 }
 
-// Stylised building footprint matching design.png
-function Building3D() {
-  return (
-    <svg width="120" height="150" viewBox="0 0 120 150" fill="none">
-      {/* Main building body */}
-      <polygon points="25,40 75,20 110,55 60,75" fill="#1E3A5F" />
-      <polygon points="25,40 60,75 60,130 25,95" fill="#172D4D" />
-      <polygon points="110,55 60,75 60,130 110,105" fill="#243F63" />
-      {/* Roof cutout / courtyard */}
-      <polygon points="45,52 72,42 90,60 63,70" fill="#F3F4F6" />
-      {/* Road / path */}
-      <polygon points="55,130 70,130 80,150 65,150" fill="#E5E7EB" />
-      <polygon points="20,110 35,95 40,100 25,115" fill="#E5E7EB" />
-      {/* Small accent windows */}
-      <rect x="30" y="70" width="8" height="10" rx="1" fill="#2563EB" opacity="0.5" />
-      <rect x="42" y="80" width="8" height="10" rx="1" fill="#2563EB" opacity="0.4" />
-      <rect x="80" y="75" width="8" height="10" rx="1" fill="#2563EB" opacity="0.4" />
-      <rect x="92" y="85" width="8" height="10" rx="1" fill="#2563EB" opacity="0.3" />
-    </svg>
-  );
-}
+
+// ── Page ───────────────────────────────────────────────────────────────────
 
 export default function UploadPage() {
   const [viewMode, setViewMode] = useState<ViewMode>('3D');
+  const [llm, setLlm] = useState(LLM_OPTIONS[0]);
+  const mapRef = useRef<MapRef>(null);
+
+  const handleModeChange = useCallback((mode: ViewMode) => {
+    setViewMode(mode);
+    const target = mode === '3D' ? VIEW_3D : VIEW_2D;
+    mapRef.current?.easeTo({ ...target, duration: 900 });
+  }, []);
+
+  const handleRefresh = useCallback(() => {
+    mapRef.current?.easeTo({ ...INITIAL_VIEW, duration: 700 });
+    setViewMode('3D');
+  }, []);
 
   return (
     <div style={{
@@ -79,7 +99,7 @@ export default function UploadPage() {
     }}>
       <div style={{
         width: '100%',
-        maxWidth: 680,
+        maxWidth: 900,
         background: '#FFFFFF',
         borderRadius: 14,
         border: '1px solid #E5E7EB',
@@ -95,15 +115,32 @@ export default function UploadPage() {
           padding: '12px 16px',
           borderBottom: '1px solid #F3F4F6',
         }}>
-          {/* Title */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <CheckCircleIcon />
             <span style={{ fontSize: 15, fontWeight: 600, color: '#111827' }}>Result</span>
           </div>
 
-          {/* Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            {/* 2D / 3D toggle */}
+          <select
+            value={llm}
+            onChange={e => setLlm(e.target.value)}
+            style={{
+              fontSize: 13,
+              fontWeight: 500,
+              color: '#374151',
+              background: '#F9FAFB',
+              border: '1px solid #E5E7EB',
+              borderRadius: 8,
+              padding: '5px 10px',
+              cursor: 'pointer',
+              outline: 'none',
+            }}
+          >
+            {LLM_OPTIONS.map(opt => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+
+          {/* <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <div style={{
               display: 'flex',
               background: '#F3F4F6',
@@ -114,7 +151,7 @@ export default function UploadPage() {
               {(['2D', '3D'] as ViewMode[]).map(mode => (
                 <button
                   key={mode}
-                  onClick={() => setViewMode(mode)}
+                  onClick={() => handleModeChange(mode)}
                   style={{
                     padding: '4px 12px',
                     borderRadius: 6,
@@ -132,74 +169,124 @@ export default function UploadPage() {
               ))}
             </div>
 
-            {/* Dots menu */}
-            <button style={{
+            <button onClick={handleRefresh} style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              padding: '4px 6px', borderRadius: 6,
-              display: 'flex', alignItems: 'center',
+              padding: '4px 6px', borderRadius: 6, display: 'flex', alignItems: 'center',
             }}>
               <DotsIcon />
             </button>
 
-            {/* Refresh */}
-            <button style={{
+            <button onClick={handleRefresh} style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              padding: '4px 6px', borderRadius: 6,
-              display: 'flex', alignItems: 'center',
+              padding: '4px 6px', borderRadius: 6, display: 'flex', alignItems: 'center',
             }}>
               <RefreshIcon />
             </button>
-          </div>
+          </div> */}
         </div>
 
-        {/* ── CANVAS AREA ── */}
-        <div style={{
-          position: 'relative',
-          background: '#FAFAFA',
-          height: 380,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}>
+        {/* ── CANVAS — image fills area, map inset bottom-right ── */}
+        <div style={{ position: 'relative', height: 520, background: '#FAFAFA' }}>
+
+          {/* Main image area */}
+          <div style={{ position: 'absolute', inset: 0 }}>
+            <img
+              src="/img2.jpeg"
+              alt="Site photo"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+
           {/* Status label */}
           <div style={{
-            marginTop: 18,
-            fontSize: 12,
-            color: '#9CA3AF',
-            letterSpacing: '0.02em',
+            position: 'absolute',
+            top: 12,
+            left: 14,
+            background: 'rgba(255,255,255,0.88)',
+            backdropFilter: 'blur(6px)',
+            borderRadius: 8,
+            border: '1px solid #E5E7EB',
+            padding: '4px 10px',
+            fontSize: 11,
+            color: '#6B7280',
+            letterSpacing: '0.03em',
+            pointerEvents: 'none',
+            zIndex: 10,
           }}>
             Ready for review
           </div>
 
-          {/* 3D Building model */}
+          {/* ── TAGS — bottom left ── */}
           <div style={{
-            flex: 1,
+            position: 'absolute',
+            bottom: 14,
+            left: 14,
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            opacity: viewMode === '3D' ? 1 : 0.35,
-            transition: 'opacity 0.2s',
+            gap: 6,
+            zIndex: 10,
           }}>
-            <Building3D />
+            {[
+              { label: 'Glass',   bg: '#EFF6FF', color: '#3B82F6', border: '#BFDBFE' },
+              { label: 'Paper',   bg: '#F0FDF4', color: '#16A34A', border: '#BBF7D0' },
+              { label: 'Organic', bg: '#FFF7ED', color: '#EA580C', border: '#FED7AA' },
+            ].map(({ label, bg, color, border }) => (
+              <span key={label} style={{
+                background: bg,
+                color,
+                border: `1px solid ${border}`,
+                borderRadius: 20,
+                fontSize: 11,
+                fontWeight: 600,
+                padding: '4px 10px',
+                letterSpacing: '0.03em',
+              }}>
+                {label}
+              </span>
+            ))}
           </div>
 
-          {/* Comment icon — bottom right */}
-          <button style={{
+          {/* ── MAP INSET — bottom right ── */}
+          <div style={{
             position: 'absolute',
             bottom: 14,
             right: 14,
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: 6,
-            borderRadius: 8,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: 360,
+            height: 260,
+            borderRadius: 10,
+            overflow: 'hidden',
+            border: '1px solid #E5E7EB',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+            zIndex: 10,
           }}>
-            <CommentIcon />
-          </button>
+            <Map
+              ref={mapRef}
+              initialViewState={INITIAL_VIEW}
+              style={{ width: '100%', height: '100%' }}
+              mapStyle={MAP_STYLE}
+            >
+              <NavigationControl position="top-right" showCompass={false} />
+            </Map>
+
+            {/* map mode badge */}
+            <div style={{
+              position: 'absolute',
+              bottom: 6,
+              left: 8,
+              background: 'rgba(0,0,0,0.55)',
+              backdropFilter: 'blur(4px)',
+              borderRadius: 5,
+              padding: '2px 7px',
+              fontSize: 10,
+              fontWeight: 600,
+              color: '#fff',
+              letterSpacing: '0.06em',
+              pointerEvents: 'none',
+            }}>
+              {viewMode}
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   );
