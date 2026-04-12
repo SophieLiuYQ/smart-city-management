@@ -205,3 +205,7 @@ Built for [Spark Hack NYC 2026](https://luma.com/spark-hack-nyc) — Environment
 ## Resources 
 
 [Spark Hack Notion Page](https://concrete-panther-c83.notion.site/Spark-Hack-Series-New-York-Presented-by-NVIDIA-Acer-and-Antler-611f567d17cc8207881a0162071001c8)
+
+##Finetuning sources
+https://www.kaggle.com/datasets/mostafaabla/garbage-classification
+https://universe.roboflow.com/garbage-detection-czeg5/garbage_detection-wvzwv
