@@ -1,6 +1,7 @@
 import ollama
 from pydantic import BaseModel
 from typing import List
+from typing import Optional, List, Literal
 
 # 1. Define the classification schema
 class WasteClassification(BaseModel):
@@ -10,6 +11,9 @@ class WasteClassification(BaseModel):
     contains_batteries: bool
     confidence_score: float
     detected_items: List[str]
+
+class ImageAnalysis(BaseModel):
+    detected_materials: List[Literal["organics", "electronics", "plastic", "battery"]]
 
 # 2. Request structured output from a vision model
 # Ensure you have the vision model pulled (e.g., ollama pull qwen3.5)

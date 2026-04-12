@@ -1,11 +1,18 @@
 import ollama
 import os
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from utils.trash_classifyer import ImageAnalysis
 from typing import Optional
 from pydantic import BaseModel
+import dotenv
+import os
+
+dotenv.load()
 
 app = FastAPI()
-MODEL = "qwen3.5"
+# MODEL = "qwen3.5"
+MODEL = os.getenv("MODEL")
+
 
 # 1. Schema matching your exact requested categories
 class ImageClassifier(BaseModel):
@@ -39,11 +46,11 @@ async def classify_image(
                 'content': 'Determine if the image contains organics, electronics, plastic, or batteries.',
                 'images': [image_source]
             }],
-            format=ImageClassifier.model_json_schema()
+            format=ImageAnalysis.model_json_schema()
         )
         
         # 3. Return the validated JSON structure
-        return ImageClassifier.model_validate_json(response.message.content)
+        return ImageAnalysis.model_validate_json(response.message.content)
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
