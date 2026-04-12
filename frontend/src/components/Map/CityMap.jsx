@@ -328,7 +328,7 @@ export default function CityMap() {
     }
 
     // Energy mode — click on energy sites
-    if (viewMode === 'energy') {
+    if (viewMode === 'energy' && map.getLayer('energy-sites')) {
       const features = map.queryRenderedFeatures(e.point, { layers: ['energy-sites'] });
       if (features.length) {
         const props = features[0].properties;
@@ -447,7 +447,7 @@ export default function CityMap() {
       return;
     }
 
-    if (viewMode === 'energy') {
+    if (viewMode === 'energy' && map.getLayer('energy-sites')) {
       const features = map.queryRenderedFeatures(e.point, { layers: ['energy-sites'] });
       map.getCanvas().style.cursor = features.length ? 'pointer' : '';
 
@@ -505,7 +505,7 @@ export default function CityMap() {
           'highlight-stars',
           'district-buildings',
           'top10-districts',
-          ...(viewMode === 'energy' ? ['energy-sites'] : viewMode === 'waste' ? ['waste-districts'] : []),
+          ...(viewMode === 'waste' ? ['waste-districts'] : []),
         ]}
         attributionControl={false}
         logoPosition="bottom-right"
