@@ -3,7 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 
 const NAV_ITEMS = [
-  { href: "#capabilities", label: "Research" },
+  { href: "/map", label: "Research" },
   { href: "#audit-shield", label: "Product" },
 ];
 

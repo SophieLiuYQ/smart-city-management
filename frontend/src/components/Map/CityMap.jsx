@@ -62,20 +62,17 @@ const HIGHLIGHT_BUILDINGS_GEOJSON = {
     type: 'Feature',
     properties: {
       rank: b.rank,
-      site: b.site,
-      address: b.address,
-      borough: b.borough,
-      district_code: b.district_code,
-      district_name: b.district_name,
-      agency: b.agency,
-      ej: b.environmental_justice_area === 'Yes',
+      site: b.Site,
+      address: b.Address,
+      borough: b.Borough,
+      agency: b.Agency,
+      ej: b['Environmental Justice Area'] === 'Yes',
       energy_score: b.energy_score,
       waste_score: b.waste_score,
       nexus_score: b.nexus_score,
       bess_kwh: b.recommended_bess_kwh,
       savings_usd: b.estimated_annual_savings_usd,
       recommendation: b.top_recommendation,
-      why: b.why_highlighted,
     },
     geometry: { type: 'Point', coordinates: [b.lon, b.lat] },
   })),
@@ -131,61 +128,6 @@ const DARK_MAP_STYLE = {
     },
   },
   layers: [{ id: 'carto-dark-layer', type: 'raster', source: 'carto-dark' }],
-};
-
-/** Build GeoJSON FeatureCollections from the site arrays */
-function buildEnergyGeoJSON(sites) {
-  return {
-    type: 'FeatureCollection',
-    features: sites.map(s => ({
-      type: 'Feature',
-      properties: { ...s },
-      geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
-    })),
-  };
-}
-
-function buildNexusGeoJSON(sites) {
-  return {
-    type: 'FeatureCollection',
-    features: sites.map(s => ({
-      type: 'Feature',
-      properties: { ...s },
-      geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
-    })),
-  };
-}
-
-/** Layer paint expressions */
-const ENERGY_CIRCLE_LAYER = {
-  id: 'energy-sites',
-  type: 'circle',
-  source: 'energy-sites',
-  paint: {
-    'circle-radius': ['interpolate', ['linear'], ['get', 'nexusScore'], 88, 7, 95, 10, 100, 13],
-    'circle-color': [
-      'case',
-      ['>=', ['get', 'nexusScore'], 95], '#EF4444',
-      ['>=', ['get', 'nexusScore'], 90], '#F59E0B',
-      '#3B82F6',
-    ],
-    'circle-opacity': 0.9,
-    'circle-stroke-color': 'rgba(255,255,255,0.15)',
-    'circle-stroke-width': 1,
-  },
-};
-
-const ENERGY_CIRCLE_SELECTED = {
-  id: 'energy-sites-selected',
-  type: 'circle',
-  source: 'energy-sites',
-  filter: ['==', ['get', 'id'], -1], // updated dynamically
-  paint: {
-    'circle-radius': ['interpolate', ['linear'], ['get', 'score'], 50, 10, 100, 16],
-    'circle-color': 'transparent',
-    'circle-stroke-color': '#fff',
-    'circle-stroke-width': 2,
-  },
 };
 
 const WASTE_FILL_LAYER = {
@@ -301,17 +243,17 @@ const DISTRICT_LABEL_LAYER = {
 
 export default function CityMap() {
   const mapRef = useRef(null);
-  const { viewMode, selectedId, selectSite, borough, minScore } = useDashboard();
+  const { viewMode, selectedId, selectSite } = useDashboard();
   const [popup, setPopup] = useState(null); // { lng, lat, content }
 
-  /** Filter energy sites by borough + minScore */
-  const filteredEnergySites = useMemo(() =>
-    ENERGY_SITES.filter(s =>
-      (borough === 'All Boroughs' || s.borough === borough) && s.score >= minScore
-    ), [borough, minScore]);
-
-  // const energyGeoJSON     = useMemo(() => buildEnergyGeoJSON(filteredEnergySites), [filteredEnergySites]);
-  const nexusGeoJSON      = useMemo(() => buildNexusGeoJSON(NEXUS_SITES), []);
+  const nexusGeoJSON = useMemo(() => ({
+    type: 'FeatureCollection',
+    features: NEXUS_SITES.map(s => ({
+      type: 'Feature',
+      properties: { ...s },
+      geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
+    })),
+  }), []);
   const wasteDistrictData = useMemo(() => WASTE_DISTRICT_POINTS, []);
 
   /** FlyTo selected site */

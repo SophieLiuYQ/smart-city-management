@@ -14,8 +14,8 @@ import BoroughComparison from '@/components/BoroughComparison';
 
 function Dashboard() {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#F1F5F9' }}>
-      <Sidebar />
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#F1F5F9', paddingLeft: '50px', paddingRight: '50px' }}>
+      {/* <Sidebar /> */}
 
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         {/* <Header /> */}
