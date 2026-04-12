@@ -470,8 +470,9 @@ def generate_labels(features, feature_cols):
 
 
 def train_and_score(features, feature_cols, energy_y, waste_y, nexus_y):
-    """Train 3 XGBoost models and predict."""
+    """Train 3 XGBoost models with proper train/val/test split."""
     X = features
+    n = len(X)
 
     # Detect GPU
     try:
@@ -483,22 +484,110 @@ def train_and_score(features, feature_cols, energy_y, waste_y, nexus_y):
         mode = "CPU"
     print(f"  [XGBoost] {mode} mode")
 
+    # ── Train / Validation / Test split: 70% / 15% / 15% ──
+    np.random.seed(42)
+    indices = np.random.permutation(n)
+    train_end = int(n * 0.70)
+    val_end = int(n * 0.85)
+
+    train_idx = indices[:train_end]
+    val_idx = indices[train_end:val_end]
+    test_idx = indices[val_end:]
+
+    print(f"\n  Split: Train={len(train_idx)} ({len(train_idx)/n*100:.0f}%) | "
+          f"Val={len(val_idx)} ({len(val_idx)/n*100:.0f}%) | "
+          f"Test={len(test_idx)} ({len(test_idx)/n*100:.0f}%)")
+
+    base_params = {
+        "objective": "reg:squarederror",
+        "max_depth": 3,          # shallower = less overfitting (from tuning)
+        "eta": 0.1,
+        "subsample": 0.7,
+        "colsample_bytree": 0.8,
+        "min_child_weight": 10,  # higher = more conservative (from tuning)
+        "eval_metric": "rmse",
+        **gpu_params,
+    }
+
     results = {}
+    print(f"\n  {'Score':15s}  {'Train RMSE':>10s}  {'Val RMSE':>10s}  {'Test RMSE':>10s}  "
+          f"{'Test R²':>8s}  {'Rounds':>6s}  {'Overfit':>8s}  Time")
+    print(f"  {'─'*85}")
+
     for name, y in [("energy", energy_y), ("waste", waste_y), ("nexus", nexus_y)]:
         t0 = time.time()
-        dtrain = xgb.DMatrix(X, label=y, feature_names=feature_cols)
-        params = {
-            "objective": "reg:squarederror",
-            "max_depth": 6, "eta": 0.1,
-            "subsample": 0.8, "colsample_bytree": 0.8,
-            "min_child_weight": 5, "eval_metric": "rmse",
-            **gpu_params,
-        }
-        model = xgb.train(params, dtrain, num_boost_round=200, verbose_eval=False)
-        preds = np.clip(model.predict(dtrain), 0, 100).astype(int)
+
+        X_train, y_train = X[train_idx], y[train_idx]
+        X_val, y_val = X[val_idx], y[val_idx]
+        X_test, y_test = X[test_idx], y[test_idx]
+
+        dtrain = xgb.DMatrix(X_train, label=y_train, feature_names=feature_cols)
+        dval = xgb.DMatrix(X_val, label=y_val, feature_names=feature_cols)
+        dtest = xgb.DMatrix(X_test, label=y_test, feature_names=feature_cols)
+
+        # Early stopping on validation set — prevents overfitting
+        model = xgb.train(
+            base_params, dtrain,
+            num_boost_round=500,  # high max, early stopping will cut it
+            evals=[(dtrain, "train"), (dval, "val")],
+            early_stopping_rounds=20,  # stop if val doesn't improve for 20 rounds
+            verbose_eval=False,
+        )
+
+        best_rounds = model.best_iteration + 1
+
+        # Predictions
+        train_preds = model.predict(dtrain)
+        val_preds = model.predict(dval)
+        test_preds = model.predict(dtest)
+
+        # Metrics
+        train_rmse = np.sqrt(np.mean((train_preds - y_train) ** 2))
+        val_rmse = np.sqrt(np.mean((val_preds - y_val) ** 2))
+        test_rmse = np.sqrt(np.mean((test_preds - y_test) ** 2))
+
+        ss_res = np.sum((y_test - test_preds) ** 2)
+        ss_tot = np.sum((y_test - y_test.mean()) ** 2)
+        test_r2 = 1 - ss_res / ss_tot if ss_tot > 0 else 0
+
+        overfit_gap = test_rmse - train_rmse
+        overfit = "YES" if overfit_gap > 2 else "mild" if overfit_gap > 1 else "no"
+
         elapsed = time.time() - t0
-        results[name] = {"model": model, "preds": preds, "time": elapsed}
-        print(f"    {name}_score: {elapsed:.2f}s  mean={preds.mean():.1f}  range=[{preds.min()}, {preds.max()}]")
+
+        print(f"  {name+'_score':15s}  {train_rmse:>10.2f}  {val_rmse:>10.2f}  {test_rmse:>10.2f}  "
+              f"{test_r2:>8.3f}  {best_rounds:>6d}  {overfit:>8s}  {elapsed:.2f}s")
+
+        # Predict on ALL data using the trained model (for output file)
+        dall = xgb.DMatrix(X, label=y, feature_names=feature_cols)
+        all_preds = np.clip(model.predict(dall), 0, 100).astype(int)
+
+        results[name] = {
+            "model": model,
+            "preds": all_preds,
+            "time": elapsed,
+            "train_rmse": train_rmse,
+            "val_rmse": val_rmse,
+            "test_rmse": test_rmse,
+            "test_r2": test_r2,
+            "best_rounds": best_rounds,
+            "overfit": overfit,
+        }
+
+    # Summary
+    print(f"\n  GENERALIZATION SUMMARY:")
+    for name in ["energy", "waste", "nexus"]:
+        r = results[name]
+        print(f"    {name}_score: Train={r['train_rmse']:.2f} → Test={r['test_rmse']:.2f} "
+              f"(R²={r['test_r2']:.3f}, {r['best_rounds']} rounds, overfit={r['overfit']})")
+
+    avg_r2 = np.mean([results[n]["test_r2"] for n in ["energy", "waste", "nexus"]])
+    if avg_r2 > 0.8:
+        print(f"\n    ✅ Avg test R² = {avg_r2:.3f} — model generalizes well to unseen data")
+    elif avg_r2 > 0.6:
+        print(f"\n    ⚠️ Avg test R² = {avg_r2:.3f} — moderate generalization")
+    else:
+        print(f"\n    ❌ Avg test R² = {avg_r2:.3f} — poor generalization, may be overfitting")
 
     return results
 

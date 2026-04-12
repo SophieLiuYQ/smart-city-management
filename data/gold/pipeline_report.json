@@ -1,0 +1,60 @@
+{
+  "pipeline_version": "1.0",
+  "device": {
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "processor": "arm",
+    "cpu_cores": 12,
+    "has_gpu": false
+  },
+  "data": {
+    "sites": 4268,
+    "features": 30,
+    "train": 2987,
+    "val": 640,
+    "test": 641
+  },
+  "models": {
+    "Linear": {
+      "r2": 0.6975,
+      "time_sec": 0.729,
+      "device": "CPU"
+    },
+    "XGBoost": {
+      "r2": 0.8981,
+      "time_sec": 0.871,
+      "device": "GPU",
+      "rounds": {
+        "energy": 225,
+        "waste": 111,
+        "nexus": 184
+      }
+    },
+    "CatBoost": {
+      "r2": 0.9033,
+      "time_sec": 0.509,
+      "device": "CPU",
+      "rounds": {
+        "energy": 165,
+        "waste": 76,
+        "nexus": 170
+      }
+    }
+  },
+  "best_model": "CatBoost",
+  "best_r2": 0.9033,
+  "bess_simulation": {
+    "sites_simulated": 20,
+    "total_bess_kwh": 20000,
+    "annual_savings_usd": 784978,
+    "annual_co2_tons": 1229.0,
+    "avg_payback_years": 10.2
+  },
+  "timing": {
+    "data_loading_sec": 5.2,
+    "linear_sec": 0.729,
+    "xgboost_sec": 0.871,
+    "catboost_sec": 0.509,
+    "bess_sim_sec": 0.1,
+    "total_sec": 7.5
+  }
+}
